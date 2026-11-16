@@ -1,0 +1,154 @@
+/* Sea Level Detective — same paper, ink and brick as the website */
+section { --paper: #f1ece1; --paper2: #e8e1d2; --ink: #27211b; --soft: #4a4036; --muted: #6b5f51; --brick: #a5462f; --slate: #2f5878;
+  background: var(--paper); color: var(--ink); font-family: 'EB Garamond', Georgia, serif; padding: 128px; box-sizing: border-box;
+  display: flex; flex-direction: column; gap: 40px; }
+h1, h2 { font-family: 'IM Fell English', Georgia, serif; font-weight: 400; color: var(--ink); }
+h1 { font-size: 120px; line-height: 1.05; }
+h2 { font-size: 72px; line-height: 1.12; }
+.eyebrow { font-size: 32px; font-style: italic; color: var(--brick); }
+.lead { font-size: 40px; line-height: 1.35; color: var(--soft); }
+.small { font-size: 28px; line-height: 1.35; color: var(--muted); }
+.shot { border: 1px solid #cbbfa9; background: var(--paper2); object-fit: contain; }
+
+/* cover */
+.cover { flex-direction: row; align-items: center; gap: 64px; }
+.cover .text { width: 700px; display: flex; flex-direction: column; gap: 28px; }
+.cover .team { font-size: 32px; line-height: 1.35; color: var(--soft); }
+.cover .team b { color: var(--ink); font-weight: 600; }
+
+/* three big numbers */
+.nums { display: flex; gap: 56px; margin-top: 24px; }
+.num { flex: 1; border-top: 2px solid var(--ink); padding-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+.num .big { font-family: 'IM Fell English', Georgia, serif; font-size: 120px; line-height: 1; color: var(--brick); }
+.num .lab { font-size: 32px; line-height: 1.3; color: var(--soft); }
+
+/* finding: figures left, chart right */
+.split { display: flex; flex-direction: row; gap: 64px; align-items: center; }
+.facts { width: 600px; display: flex; flex-direction: column; gap: 40px; }
+.fact { display: flex; flex-direction: column; gap: 8px; border-left: 3px solid var(--brick); padding-left: 28px; }
+.fact .big { font-family: 'IM Fell English', Georgia, serif; font-size: 96px; line-height: 1; color: var(--brick); }
+.fact .lab { font-size: 32px; line-height: 1.3; color: var(--soft); }
+
+/* explore: two screenshots with captions */
+.pair { display: flex; flex-direction: row; gap: 64px; }
+.pair .col { width: 800px; display: flex; flex-direction: column; gap: 20px; }
+.pair .cap { font-size: 30px; line-height: 1.35; color: var(--soft); }
+.pair .cap b { color: var(--ink); font-weight: 600; }
+
+/* closing statement on dark ink */
+.dark { background: #27211b; color: #f1ece1; justify-content: center; }
+.dark h2 { color: #f1ece1; font-size: 80px; width: 1500px; }
+.dark .eyebrow { color: #e3967b; }
+.dark .lead { color: #d8cfbf; width: 1400px; }
+.dark .link { font-size: 36px; color: #f1ece1; }
+.dark .link a { color: #e3967b; }
+.foot { position: absolute; left: 128px; bottom: 64px; width: 1664px; font-size: 24px; color: #a99d8b; }
+
+/* motion: everything rises in on arrival, staged */
+.rise { animation: rise 600ms cubic-bezier(.3,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 120ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+
+/* ---- v2: story / model / graphics / society ---- */
+section { --brick: #8b3a2b; --slate: #33404f; }
+.steps { display: flex; gap: 48px; margin-top: 16px; }
+.step { flex: 1; border-top: 2px solid var(--ink); padding-top: 28px; display: flex; flex-direction: column; gap: 16px; }
+.step .k { font-family: 'IM Fell English', Georgia, serif; font-size: 56px; line-height: 1; color: var(--brick); }
+.step h3 { font-family: 'IM Fell English', Georgia, serif; font-weight: 400; font-size: 40px; line-height: 1.15; color: var(--ink); }
+.step .tx { font-size: 28px; line-height: 1.4; color: var(--soft); }
+
+.model { display: flex; flex-direction: row; gap: 72px; }
+.model .left { width: 780px; display: flex; flex-direction: column; gap: 28px; }
+.model .right { width: 812px; display: flex; flex-direction: column; gap: 28px; }
+.mblock { border-left: 3px solid var(--brick); padding-left: 24px; display: flex; flex-direction: column; gap: 8px; }
+.mblock h3 { font-family: 'IM Fell English', Georgia, serif; font-weight: 400; font-size: 34px; line-height: 1.15; color: var(--ink); }
+.mblock .tx { font-size: 27px; line-height: 1.38; color: var(--soft); }
+.mblock .eq { font-size: 30px; line-height: 1.35; color: var(--ink); font-style: italic; }
+.res { display: flex; gap: 32px; }
+.res .r { flex: 1; border-top: 2px solid var(--ink); padding-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.res .big { font-family: 'IM Fell English', Georgia, serif; font-size: 64px; line-height: 1; color: var(--brick); }
+.res .lab { font-size: 25px; line-height: 1.3; color: var(--soft); }
+
+.gallery { display: flex; gap: 52px; }
+.gallery .col { width: 520px; display: flex; flex-direction: column; gap: 20px; }
+.gallery .cap { font-size: 28px; line-height: 1.38; color: var(--soft); }
+.gallery .cap b { color: var(--ink); font-weight: 600; }
+
+.dark .cards { display: flex; gap: 48px; }
+.dark .card { flex: 1; border-top: 2px solid #8a7a63; padding-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+.dark .card h3 { font-family: 'IM Fell English', Georgia, serif; font-weight: 400; font-size: 40px; line-height: 1.15; color: #e3967b; }
+.dark .card .tx { font-size: 30px; line-height: 1.4; color: #d8cfbf; }
+.society { justify-content: flex-start; }
+.society h2 { width: 1664px; }
+.chart { display: flex; flex-direction: column; gap: 8px; }
+
+/* ---- v3: dense modelling slide, three columns ---- */
+section.mx { gap: 28px; }
+.cols3 { display: flex; gap: 48px; }
+.cols3 .c { width: 522px; display: flex; flex-direction: column; gap: 16px; }
+.cols3 .ct { font-family: 'IM Fell English', Georgia, serif; font-weight: 400; font-size: 36px; line-height: 1.1; color: var(--brick); border-bottom: 2px solid var(--ink); padding-bottom: 10px; }
+.mb { display: flex; flex-direction: column; gap: 4px; }
+.mb .mh { font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ink); }
+.mb .tx { font-size: 24px; line-height: 1.32; color: var(--soft); }
+.mb .eq { font-size: 25px; line-height: 1.32; font-style: italic; color: var(--ink); }
+.fun { display: flex; flex-direction: column; gap: 10px; }
+.fr { background: rgba(139,58,43,0.09); border-left: 4px solid var(--brick); padding: 10px 16px; display: flex; gap: 16px; align-items: center; box-sizing: border-box; }
+.fr .n { font-family: 'IM Fell English', Georgia, serif; font-size: 52px; line-height: 1; color: var(--brick); width: 64px; flex: none; }
+.fr .t { font-size: 24px; line-height: 1.3; color: var(--ink); }
+.res3 { display: flex; gap: 20px; }
+.res3 .r { flex: 1; border-top: 2px solid var(--ink); padding-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+.res3 .big { font-family: 'IM Fell English', Georgia, serif; font-size: 44px; line-height: 1; color: var(--brick); }
+.res3 .lab { font-size: 24px; line-height: 1.25; color: var(--soft); }
+.gallery.g4 { gap: 34px; }
+.gallery.g4 .col { width: 390px; gap: 16px; }
+.gallery.g4 .cap { font-size: 26px; line-height: 1.36; }
+/* real figures (matplotlib, from the data), not website screenshots */
+.fig { object-fit: contain; }   /* transparent figures sit straight on the parchment */
+.maps2 { display: flex; gap: 40px; justify-content: center; }
+/* pen-and-ink plates on the closing slide */
+.dark .card .plate { width: 100%; height: auto; display: block; border-radius: 6px; box-shadow: 0 4px 18px rgba(0,0,0,0.35); }
+/* physics slides (Zyskin): plots on white, big stats */
+.phys { display: flex; gap: 48px; }
+.phys .pc { display: flex; flex-direction: column; gap: 16px; }
+.plot { background: #ffffff; border: 1px solid #d8cfbf; object-fit: contain; }
+.pcap { font-size: 24px; line-height: 1.3; color: var(--soft); }
+.stat { display: flex; flex-direction: column; gap: 4px; border-top: 2px solid var(--ink); padding-top: 10px; }
+.stat .big { font-family: 'IM Fell English', Georgia, serif; font-size: 52px; line-height: 1; color: var(--brick); }
+.stat .lab { font-size: 24px; line-height: 1.3; color: var(--soft); }
+/* ---- v4: aligned, larger physics + statistics slides (2, 3, 4) ---- */
+section.al { padding: 92px 128px 72px; gap: 26px; }
+section.al .mb { gap: 6px; }
+section.al .mb .mh { font-size: 30px; }
+section.al .mb .tx { font-size: 27px; line-height: 1.36; }
+section.al .mb .eq { font-size: 29px; }
+section.al .pcap { font-size: 25px; line-height: 1.3; }
+section.al .stat { gap: 6px; padding-top: 12px; }
+section.al .stat .big { font-size: 66px; }
+section.al .stat .lab { font-size: 27px; }
+section.al .cols3 { gap: 56px; flex: 1; }
+section.al .cols3 .c { width: auto; flex: 1 1 0; gap: 22px; min-width: 0; }
+section.al .cols3 .ct { font-size: 38px; }
+/* slide 2: one grid, plots sized to equal height, text + stats on the same columns */
+.g3.pg { display: grid; grid-template-columns: 2.145fr 1.714fr 1.5fr; column-gap: 40px; row-gap: 14px; align-items: start; }
+.g3.pg .plot { width: 100%; height: auto; display: block; margin-top: 18px; }
+.g3.pg .mb, .g3.pg .stat { align-self: stretch; }
+.g3.pg .mb { border-top: 2px solid var(--ink); padding-top: 12px; }
+section.al .note { font-size: 23px; color: var(--muted); }
+/* slide 3: chart column widest, stats spread down their column */
+.cols3.pr .c:nth-child(1) { flex-basis: 0; flex-grow: 1.05; }
+.cols3.pr .c:nth-child(2) { flex-grow: 1.3; }
+.cols3.pr .c:nth-child(3) { flex-grow: .85; justify-content: flex-start; gap: 34px; }
+/* slide 4: funnel bars and figure fill their columns */
+.cols3.md .fr { padding: 14px 18px; }
+.cols3.md .fr .n { font-size: 60px; width: 70px; }
+.cols3.md .fr .t { font-size: 26px; }
+.cols3.md .fun { gap: 14px; }
+.cols3.md .fig { width: 100%; height: auto; display: block; }
+.cols3.md .mb + .mb { margin-top: 4px; }
+.cols3.pr .c:nth-child(3) .ct + .stat { border-top: 0; padding-top: 0; }
+.cols3.pr .c:nth-child(1) { flex-grow: 1; }
+.cols3.pr .c:nth-child(2) { flex-grow: 1.45; }
+.cols3.pr .c:nth-child(3) { flex-grow: .8; }
+.cols3.md .eq { font-size: 25px; white-space: nowrap; }
+.g3.pg + .note { margin-top: 6px; }
+.cols3.pr .c:nth-child(1) { flex-grow: 1.12; }
+.cols3.pr .c:nth-child(2) { flex-grow: 1.33; }

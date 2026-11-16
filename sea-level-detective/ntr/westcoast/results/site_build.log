@@ -1,0 +1,357 @@
+
+=============
+== PyTorch ==
+=============
+
+NVIDIA Release 25.10 (build 222058775)
+PyTorch Version 2.9.0a0+145a3a7
+Container image Copyright (c) 2025, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+Copyright (c) 2014-2024 Facebook Inc.
+Copyright (c) 2011-2014 Idiap Research Institute (Ronan Collobert)
+Copyright (c) 2012-2014 Deepmind Technologies    (Koray Kavukcuoglu)
+Copyright (c) 2011-2012 NEC Laboratories America (Koray Kavukcuoglu)
+Copyright (c) 2011-2013 NYU                      (Clement Farabet)
+Copyright (c) 2006-2010 NEC Laboratories America (Ronan Collobert, Leon Bottou, Iain Melvin, Jason Weston)
+Copyright (c) 2006      Idiap Research Institute (Samy Bengio)
+Copyright (c) 2001-2004 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
+Copyright (c) 2015      Google Inc.
+Copyright (c) 2015      Yangqing Jia
+Copyright (c) 2013-2016 The Caffe contributors
+All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+GOVERNING TERMS: The software and materials are governed by the NVIDIA Software License Agreement
+(found at https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-license-agreement/)
+and the Product-Specific Terms for NVIDIA AI Products
+(found at https://www.nvidia.com/en-us/agreements/enterprise-software/product-specific-terms-for-ai-products/).
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+NOTE: The SHMEM allocation limit is set to the default of 64MB.  This may be
+   insufficient for PyTorch.  NVIDIA recommends the use of the following flags:
+   docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 ...
+
+### prepare
+prepare: 410544 hourly rows for 9410660; threshold 0.1204 m
+### build_ntr
+build_ntr: 562 valid months, 291 surge days > 0.12035250684931507 m
+### explore_analyze
+# NTR exploration: The Battery. Train 1981-01..2010-12, test 2011-01.., 29 predictors, FDR 10%
+
+## Monthly: mean NTR, all months
+348 predictor x lead tests; 13 discoveries on train; persistence skill 0.719
+Same-month (lag 0, reference): oni +0.22, wind_ne_power +0.20, pdo_ncei +0.17, npi_power -0.17, nino34_giss +0.17, msl_montauk +0.16
+- CONFIRMED wind_ne_power leads by 1 mo: r_train +0.18, r_test +0.17 (p 0.009), skill alone 0.020, gain over persistence +0.000
+- CONFIRMED oni leads by 1 mo: r_train +0.23, r_test +0.23 (p 0.001), skill alone 0.498, gain over persistence +0.012
+- CONFIRMED msl_kings_point leads by 11 mo: r_train -0.25, r_test -0.33 (p 0.000), skill alone 0.090, gain over persistence +0.035
+- discovered on train but NOT confirmed on test: wind_ne_power@3, nino34_giss@2, msl_montauk@1, msl_kings_point@8, msl_sandy_hook@1, msl_sandy_hook@3, msl_atlantic_city@1, msl_atlantic_city@3, msl_sewells_point@1, msl_sewells_point@3
+
+## Monthly: mean NTR, cool months
+348 predictor x lead tests; 16 discoveries on train; persistence skill 0.727
+Same-month (lag 0, reference): npi_power -0.26, wind_ne_power +0.25, pna_cpc +0.25, oni +0.22, storminess_power +0.20, msl_montauk +0.19
+- CONFIRMED slp_nybight_power leads by 9 mo: r_train +0.22, r_test +0.21 (p 0.019), skill alone 0.086, gain over persistence +0.018
+- CONFIRMED natl_giss leads by 9 mo: r_train -0.23, r_test -0.31 (p 0.001), skill alone 0.358, gain over persistence +0.033
+- discovered on train but NOT confirmed on test: wind_ne_power@1, wind_ne_power@2, nino34_giss@2, natl_giss@3, natl_giss@5, subpolar_giss@9, oni@1, ao_cpc@9, msl_montauk@1, msl_sandy_hook@1, msl_atlantic_city@1, msl_atlantic_city@3, msl_sewells_point@1, msl_key_west@8
+
+## Monthly: surge days, cool months
+348 predictor x lead tests; 0 discoveries on train; persistence skill 0.097
+Same-month (lag 0, reference): wind_ne_power +0.23, msl_kings_point +0.21, msl_charleston +0.19, slp_nybight_power -0.18, hudson_flow -0.16, oni +0.15
+
+## Season-ahead: Jul-Sep predictor -> Oct-Apr surge days (quasi-Poisson + trend)
+| predictor | RR/SD train | p train | FDR | test skill | LOO skill | RR/SD all | p all |
+|---|---:|---:|:-:|---:|---:|---:|---:|
+| oni | 2.54 | 0.000 | yes | +0.367 | +0.412 | 2.40 | 0.0000 |
+| nino34_giss | 2.61 | 0.000 | yes | +0.498 | +0.409 | 2.45 | 0.0000 |
+| natl_giss | 0.37 | 0.008 | yes | -0.205 | +0.161 | 0.44 | 0.0043 |
+| trop_natl_giss | 0.48 | 0.030 |  | -0.250 | +0.061 | 0.60 | 0.0326 |
+| nwatl_shelf_giss | 0.37 | 0.038 |  | -0.175 | +0.058 | 0.49 | 0.0419 |
+| subpolar_giss | 0.70 | 0.143 |  | -0.623 | +0.030 | 0.76 | 0.0745 |
+| pdo_ncei | 1.28 | 0.390 |  | +0.263 | +0.030 | 1.43 | 0.0578 |
+| msl_sandy_hook | 0.32 | 0.055 |  | +0.021 | +0.028 | 0.37 | 0.0322 |
+| msl_montauk | 0.37 | 0.116 |  | +0.067 | +0.024 | 0.43 | 0.0928 |
+| msl_boston | 0.34 | 0.154 |  | -0.452 | -0.005 | 0.54 | 0.2817 |
+| msl_portland | 0.78 | 0.732 |  | +0.126 | -0.019 | 0.65 | 0.2839 |
+| seaice_arctic | 1.14 | 0.578 |  | +0.040 | -0.021 | 1.15 | 0.4377 |
+| previous_season_surge | 0.69 | 0.310 |  | -0.026 | -0.024 | 0.75 | 0.2988 |
+| msl_sewells_point | 0.84 | 0.740 |  | -0.018 | -0.026 | 0.95 | 0.9057 |
+| msl_atlantic_city | 1.05 | 0.939 |  | -0.006 | -0.027 | 1.04 | 0.9404 |
+| battery_ntr_summer | 1.22 | 0.409 |  | +0.104 | -0.031 | 1.34 | 0.0796 |
+| wind_ne_power | 1.01 | 0.993 |  | +0.001 | -0.044 | 1.13 | 0.7887 |
+| nao_power | 1.71 | 0.380 |  | -0.473 | -0.044 | 0.94 | 0.8867 |
+| msl_charleston | 1.32 | 0.440 |  | -0.029 | -0.045 | 1.29 | 0.3695 |
+| qbo_cpc | 1.14 | 0.587 |  | +0.020 | -0.045 | 1.13 | 0.5167 |
+| slp_nybight_power | 1.86 | 0.492 |  | -0.287 | -0.047 | 1.14 | 0.7991 |
+| pna_cpc | 1.45 | 0.372 |  | +0.008 | -0.052 | 1.35 | 0.3649 |
+| ao_cpc | 1.89 | 0.511 |  | -0.279 | -0.054 | 0.80 | 0.7582 |
+| npi_power | 0.18 | 0.039 |  | -0.454 | -0.054 | 0.40 | 0.2163 |
+| nao_cpc | 2.80 | 0.031 |  | -2.025 | -0.059 | 1.22 | 0.4940 |
+| msl_key_west | 1.29 | 0.479 |  | +0.051 | -0.061 | 1.38 | 0.2820 |
+| hudson_flow | 1.19 | 0.823 |  | -0.028 | -0.061 | 0.96 | 0.9302 |
+| polar_slp_power | 0.60 | 0.274 |  | -0.282 | -0.070 | 0.88 | 0.7578 |
+| msl_bermuda | 0.89 | 0.802 |  | +0.003 | -0.075 | 0.88 | 0.7133 |
+| storminess_power | 1.55 | 0.526 |  | +0.017 | -0.090 | 1.49 | 0.4705 |
+
+Added to ENSO (LOO gain, test gain): msl_sandy_hook +0.063/+0.010; msl_montauk +0.050/+0.201; msl_boston +0.034/-0.391; natl_giss +0.034/-0.243; pna_cpc +0.019/+0.170; slp_nybight_power +0.007/-3.606; npi_power +0.001/+0.011; trop_natl_giss +0.000/-0.197
+
+## ENSO lead-time curve (all seasons): month -> RR/SD [CI], p, LOO skill
+- oni month  1 (+9 mo before Oct): RR 1.03 [0.76, 1.41], p 0.8310, LOO -0.025
+- oni month  2 (+8 mo before Oct): RR 1.06 [0.74, 1.51], p 0.7661, LOO -0.022
+- oni month  3 (+7 mo before Oct): RR 1.15 [0.75, 1.78], p 0.5253, LOO -0.014
+- oni month  4 (+6 mo before Oct): RR 1.48 [0.89, 2.46], p 0.1285, LOO +0.028
+- oni month  5 (+5 mo before Oct): RR 2.43 [1.40, 4.21], p 0.0015, LOO +0.183
+- oni month  6 (+4 mo before Oct): RR 3.18 [1.97, 5.13], p 0.0000, LOO +0.335
+- oni month  7 (+3 mo before Oct): RR 2.82 [2.00, 3.99], p 0.0000, LOO +0.391
+- oni month  8 (+2 mo before Oct): RR 2.35 [1.76, 3.14], p 0.0000, LOO +0.388
+- oni month  9 (+1 mo before Oct): RR 2.11 [1.64, 2.71], p 0.0000, LOO +0.427
+- oni month 10 (+0 mo before Oct): RR 1.97 [1.58, 2.47], p 0.0000, LOO +0.471
+- oni month 11 (-1 mo before Oct): RR 1.94 [1.58, 2.37], p 0.0000, LOO +0.525
+- oni month 12 (-2 mo before Oct): RR 1.94 [1.61, 2.34], p 0.0000, LOO +0.570
+- nino34_giss month  1 (+9 mo before Oct): RR 1.06 [0.77, 1.47], p 0.7132, LOO -0.021
+- nino34_giss month  2 (+8 mo before Oct): RR 1.04 [0.70, 1.55], p 0.8400, LOO -0.022
+- nino34_giss month  3 (+7 mo before Oct): RR 1.15 [0.71, 1.86], p 0.5804, LOO -0.014
+- nino34_giss month  4 (+6 mo before Oct): RR 1.75 [1.00, 3.07], p 0.0487, LOO +0.066
+- nino34_giss month  5 (+5 mo before Oct): RR 2.46 [1.45, 4.17], p 0.0008, LOO +0.191
+- nino34_giss month  6 (+4 mo before Oct): RR 3.51 [2.12, 5.80], p 0.0000, LOO +0.369
+- nino34_giss month  7 (+3 mo before Oct): RR 2.87 [2.04, 4.03], p 0.0000, LOO +0.402
+- nino34_giss month  8 (+2 mo before Oct): RR 2.36 [1.77, 3.13], p 0.0000, LOO +0.390
+- nino34_giss month  9 (+1 mo before Oct): RR 2.14 [1.63, 2.82], p 0.0000, LOO +0.400
+- nino34_giss month 10 (+0 mo before Oct): RR 2.08 [1.65, 2.61], p 0.0000, LOO +0.498
+- nino34_giss month 11 (-1 mo before Oct): RR 1.99 [1.62, 2.45], p 0.0000, LOO +0.535
+- nino34_giss month 12 (-2 mo before Oct): RR 2.13 [1.74, 2.60], p 0.0000, LOO +0.615
+
+## Outlook 2026-27 by lead month (expected Oct-Apr surge days [95% CI of the mean]; * = beyond the observed range)
+- oni month 5: +1.62 SD (max seen +1.55)* -> 8.7 [3.6, 21.4] vs trend-only 3.4
+- oni month 6: +2.15 SD (max seen +1.73)* -> 19.6 [8.0, 48.2] vs trend-only 3.4
+- oni month 7: +2.64 SD (max seen +2.03)* -> 25.0 [11.0, 56.8] vs trend-only 3.4
+- oni month 8: +3.06 SD (max seen +2.37)* -> 24.7 [10.8, 56.3] vs trend-only 3.4
+- oni month 9: +3.43 SD (max seen +2.72)* -> 24.3 [10.8, 54.7] vs trend-only 3.4
+- nino34_giss month 5: +1.23 SD (max seen +1.38) -> 7.4 [3.2, 17.4] vs trend-only 3.4
+- nino34_giss month 6: +1.85 SD (max seen +1.45)* -> 19.7 [8.0, 48.2] vs trend-only 3.4
+- nino34_giss month 7: +2.15 SD (max seen +1.84)* -> 19.1 [8.8, 41.6] vs trend-only 3.4
+- nino34_giss month 8: +2.60 SD (max seen +2.16)* -> 21.7 [9.7, 48.4] vs trend-only 3.4
+- nino34_giss month 9: +2.87 SD (max seen +2.39)* -> 22.6 [9.6, 52.9] vs trend-only 3.4
+
+## Response by calendar month (August ONI -> surge days in that month)
+- month 10: RR 3.31 [1.11, 9.88], p 0.032, mean 0.3 days
+- month 11: RR 5.23 [2.29, 11.95], p 0.000, mean 0.4 days
+- month 12: RR 3.38 [1.80, 6.34], p 0.000, mean 0.8 days
+- month  1: RR 2.21 [1.30, 3.75], p 0.003, mean 1.2 days
+- month  2: RR 2.05 [1.33, 3.16], p 0.001, mean 1.8 days
+- month  3: RR 1.39 [0.63, 3.04], p 0.416, mean 0.7 days
+- month  4: RR 2.51 [0.58, 10.88], p 0.219, mean 0.0 days
+
+## Other gauges (August ONI -> Oct-Apr surge days)
+- the_battery: RR 2.35 [1.76, 3.14], p 0.0000, LOO +0.388, test +0.380, mean 5.3 days, n 46
+### explore_maps
+month  1: 3039 cells with |r|>=0.2, 955 with |r|>=0.3, max |r| 0.51
+month  2: 4069 cells with |r|>=0.2, 1878 with |r|>=0.3, max |r| 0.52
+month  3: 4501 cells with |r|>=0.2, 1150 with |r|>=0.3, max |r| 0.50
+month  4: 5967 cells with |r|>=0.2, 2445 with |r|>=0.3, max |r| 0.61
+month  5: 4778 cells with |r|>=0.2, 1387 with |r|>=0.3, max |r| 0.61
+month  6: 4352 cells with |r|>=0.2, 1756 with |r|>=0.3, max |r| 0.57
+month  7: 5394 cells with |r|>=0.2, 1965 with |r|>=0.3, max |r| 0.59
+month  8: 6036 cells with |r|>=0.2, 2179 with |r|>=0.3, max |r| 0.56
+month  9: 6167 cells with |r|>=0.2, 2522 with |r|>=0.3, max |r| 0.59
+month 10: 5102 cells with |r|>=0.2, 2463 with |r|>=0.3, max |r| 0.57
+month 11: 5671 cells with |r|>=0.2, 2586 with |r|>=0.3, max |r| 0.59
+month 12: 6150 cells with |r|>=0.2, 2862 with |r|>=0.3, max |r| 0.66
+  2380 km  Pacific-North America pattern                same-month r +0.13  season LOO -0.052  
+  3547 km  Charleston sea level                         same-month r +0.07  season LOO -0.045  
+  3664 km  Key West sea level                           same-month r +0.01  season LOO -0.061  
+  3791 km  Sewells Point sea level                      same-month r +0.14  season LOO -0.026  
+  3929 km  Atlantic City sea level                      same-month r +0.14  season LOO -0.027  
+  3954 km  Sandy Hook sea level                         same-month r +0.14  season LOO +0.028  
+  3972 km  Kings Point sea level                        same-month r +0.15  season LOO +nan  
+  3972 km  Hudson River discharge                       same-month r -0.08  season LOO -0.061  
+  4041 km  NY Bight wind (NASA POWER)                   same-month r +0.20  season LOO -0.044  
+  4041 km  NY Bight pressure (NASA POWER)               same-month r -0.12  season LOO -0.047  
+  4041 km  NY Bight storminess (NASA POWER)             same-month r +0.11  season LOO -0.090  
+  4123 km  Montauk sea level                            same-month r +0.16  season LOO +0.024  
+  4187 km  Aleutian low (NASA POWER)                    same-month r -0.17  season LOO -0.054  
+  4189 km  Boston sea level                             same-month r +0.09  season LOO -0.005  
+  4249 km  Portland sea level                           same-month r +0.08  season LOO -0.019  
+  4552 km  NW Atlantic shelf SST (NASA GISTEMP)         same-month r -0.08  season LOO +0.058  
+  4590 km  North Pacific (PDO)                          same-month r +0.17  season LOO +0.030  
+  4673 km  Equatorial Pacific (NOAA ONI)                same-month r +0.22  season LOO +0.412  CONFIRMED
+  4673 km  Equatorial Pacific (NASA GISTEMP Nino3.4)    same-month r +0.17  season LOO +0.409  CONFIRMED
+  4938 km  Bermuda sea level                            same-month r +0.06  season LOO -0.075  
+  5615 km  Arctic sea ice                               same-month r -0.01  season LOO -0.021  
+  6533 km  Arctic (AO)                                  same-month r -0.10  season LOO -0.054  
+  6533 km  Arctic pressure (NASA POWER)                 same-month r +0.05  season LOO -0.070  
+  6593 km  Subpolar gyre SST (NASA GISTEMP)             same-month r -0.11  season LOO +0.030  
+  7097 km  Tropical N. Atlantic SST (NASA GISTEMP)      same-month r -0.04  season LOO +0.061  
+  7218 km  North Atlantic SST (NASA GISTEMP)            same-month r -0.06  season LOO +0.161  
+  7438 km  North Atlantic (NOAA NAO)                    same-month r -0.01  season LOO -0.059  
+  7438 km  North Atlantic (NASA POWER NAO)              same-month r -0.03  season LOO -0.044  
+ 14153 km  Tropical stratosphere (QBO)                  same-month r +0.06  season LOO -0.045  
+### explore_predictions
+seasons: 46 observed; test seasons 16
+  test mean abs error, pred_trend_only_trainfit: 3.52 days
+  test mean abs error, pred_oni_august_trainfit: 2.86 days
+  test mean abs error, pred_nasa_nino34_june_trainfit: 2.19 days
+months: test n 189, RMSE same-month model 41.1 mm, persistence 31.8 mm, climatology 61.3 mm
+### explore_signal_winters
+npi_power                    best month  3  loo_skill +0.067  closer 23/45
+polar_slp_power              best month  9  loo_skill +0.035  closer 27/45
+wind_ne_power                best month  6  loo_skill +0.128  closer 25/45
+slp_nybight_power            best month  2  loo_skill +0.051  closer 26/45
+storminess_power             best month  4  loo_skill +0.106  closer 24/45
+nino34_giss                  best month 12  loo_skill +0.621  closer 32/45
+natl_giss                    best month  8  loo_skill +0.178  closer 27/45
+subpolar_giss                best month  9  loo_skill +0.081  closer 27/45
+nwatl_shelf_giss             best month  6  loo_skill +0.086  closer 27/45
+trop_natl_giss               best month  8  loo_skill +0.104  closer 27/45
+oni                          best month 12  loo_skill +0.574  closer 34/45
+nao_cpc                      best month  9  loo_skill +0.060  closer 23/45
+ao_cpc                       best month  7  loo_skill +0.123  closer 24/45
+pna_cpc                      best month  3  loo_skill +0.185  closer 27/45
+qbo_cpc                      best month 12  loo_skill +0.027  closer 21/45
+pdo_ncei                     best month  9  loo_skill +0.146  closer 31/45
+seaice_arctic                best month  6  loo_skill +0.024  closer 27/45
+msl_bermuda                  best month  9  loo_skill -0.065  closer 13/30
+msl_portland                 best month  5  loo_skill +0.087  closer 22/45
+msl_boston                   best month  5  loo_skill +0.200  closer 25/45
+msl_montauk                  best month  5  loo_skill +0.166  closer 24/42
+msl_sandy_hook               best month  5  loo_skill +0.235  closer 27/45
+msl_atlantic_city            best month 10  loo_skill +0.188  closer 27/45
+msl_sewells_point            best month  5  loo_skill +0.199  closer 25/45
+msl_charleston               best month  7  loo_skill +0.084  closer 25/45
+msl_key_west                 best month  6  loo_skill +0.060  closer 26/45
+hudson_flow                  best month 11  loo_skill +0.042  closer 23/42
+nao_power                    best month  6  loo_skill +0.103  closer 23/45
+wrote signal_winters.json: 28 signals, 45 winters
+### explore_surge_dates
+{
+ "threshold_m": 0.12035250684931507,
+ "since": "2015-11-24",
+ "top_days": [
+  {
+   "date": "2017-02-18",
+   "surge_m": 0.306
+  },
+  {
+   "date": "2024-02-06",
+   "surge_m": 0.201
+  },
+  {
+   "date": "2015-12-11",
+   "surge_m": 0.174
+  },
+  {
+   "date": "2023-12-22",
+   "surge_m": 0.171
+  },
+  {
+   "date": "2019-11-28",
+   "surge_m": 0.17
+  },
+  {
+   "date": "2022-09-13",
+   "surge_m": 0.163
+  },
+  {
+   "date": "2015-11-25",
+   "surge_m": 0.158
+  },
+  {
+   "date": "2021-01-19",
+   "surge_m": 0.158
+  },
+  {
+   "date": "2019-12-26",
+   "surge_m": 0.153
+  },
+  {
+   "date": "2019-02-04",
+   "surge_m": 0.142
+  }
+ ],
+ "check_2016_01_23": -0.05452351598173518,
+ "n_surge_days_since": 50
+}
+### explore_ssh_gibs
+312 months, 936 fields, 3744 tiles
+tiles fetched in 0 s; missing 0
+grid built; ocean cells per month ~9025
+month  1: 2630 cells |r|>=0.2, max |r| 0.69
+month  2: 2541 cells |r|>=0.2, max |r| 0.65
+month  3: 2744 cells |r|>=0.2, max |r| 0.77
+month  4: 2681 cells |r|>=0.2, max |r| 0.68
+month  5: 2834 cells |r|>=0.2, max |r| 0.66
+month  6: 3095 cells |r|>=0.2, max |r| 0.67
+month  7: 3302 cells |r|>=0.2, max |r| 0.76
+month  8: 3692 cells |r|>=0.2, max |r| 0.69
+month  9: 3648 cells |r|>=0.2, max |r| 0.70
+month 10: 3742 cells |r|>=0.2, max |r| 0.68
+month 11: 3808 cells |r|>=0.2, max |r| 0.71
+month 12: 4171 cells |r|>=0.2, max |r| 0.72
+June, Nino3.4 box: 149 cells kept, mean r +0.41; n=26, r_p05=0.39
+### model
+# NTR study: The Battery (1993-01..2012-12 train, 2013-01.. test)
+
+Sources: {'enso': 'NOAA ONI (fallback)', 'nao': 'NCEP/NCAR reanalysis SLP, station-style NAO (public)', 'wind': 'NCEP/NCAR reanalysis NY Bight wind from NE (public)'}
+Target trend removed (train fit): -0.35 mm/yr
+
+## Lag analysis (prewhitened, train)
+- enso: r by lag 0:+0.23, 1:+0.27, 2:+0.11, 3:+0.06, 4:-0.08, 5:-0.07, 6:-0.12; significant lags (all) [0, 1], (cool season) [1]; best any 1, best leading 1
+- nao: r by lag 0:-0.14, 1:-0.05, 2:-0.14, 3:-0.05, 4:-0.09, 5:+0.03, 6:-0.01; significant lags (all) none, (cool season) none; best any 2, best leading 2
+- wind: r by lag 0:+0.13, 1:+0.17, 2:+0.12, 3:+0.10, 4:-0.00, 5:-0.08, 6:-0.10; significant lags (all) [1], (cool season) [1]; best any 1, best leading 1
+
+## Held-out skill (monthly mean NTR anomaly)
+| model | skill vs climatology | RMSE mm | clim RMSE mm | n test |
+|---|---:|---:|---:|---:|
+| persistence | 0.762 | 38.0 | 77.8 | 166 |
+| enso (best lag) | 0.335 | 58.8 | 72.1 | 165 |
+| nao (best lag) | -0.023 | 69.1 | 68.3 | 160 |
+| wind (best lag) | 0.004 | 67.5 | 67.6 | 159 |
+| all concurrent (best lag 0-6) | 0.284 | 57.2 | 67.6 | 159 |
+| all leading (lag 1-6, forecast) | 0.284 | 57.2 | 67.6 | 159 |
+| all leading + persistence | 0.694 | 37.4 | 67.6 | 159 |
+
+## Cool-season surge days (> 0.12035250684931507 m)
+Deviance skill vs trend-only on test: 0.024 (train mean 0.72 days/month)
+- enso_lag1: rate ratio per SD 2.23 [1.59, 3.12], p = 2.98e-06
+- nao_lag2: rate ratio per SD 1.16 [0.77, 1.76], p = 0.472
+- wind_lag1: rate ratio per SD 1.20 [0.87, 1.65], p = 0.271
+
+## Season forecast: August ENSO -> Oct-Apr surge days (quasi-Poisson, trend term)
+Train 32 seasons (1980-2011), test 14 (2012-2025); dispersion 6.04
+Rate ratio per SD of August ENSO: 2.30 [1.60, 3.31], p = 7.61e-06
+Test deviance skill vs trend-only: 0.462
+Mean surge days per season: train 5.8, test 4.0
+All 46 seasons: RR 2.28 [1.73, 3.00], p = 5.8e-09; leave-one-out RR 2.22-2.54, max p 2.4e-07
+Strong El Nino seasons (Aug ENSO >= 1.2 SD): {1982: 25.0, 1987: 2.0, 1997: 23.0, 2015: 18.0, 2023: 10.0}
+Outlook 2026-10..2027-04: August ENSO = +2.77 SD -> expected 36.2 surge days [7.1, 186.2] vs trend-only 3.4
+### gauges
+Boston check (first 5, published -116 -70 -128 -93 -56): [-116, -70, -128, -93, -56]
+Los Angeles, CA 9410660: 682 months 1970-01..2026-10, base months 240/240
+La Jolla, CA 9410230: 680 months 1970-01..2026-09, base months 239/240
+San Diego, CA 9410170: 681 months 1970-01..2026-09, base months 240/240
+Santa Barbara, CA 9411340: 423 months 1973-12..2026-09, base months 150/240
+Port San Luis, CA 9412110: 663 months 1970-02..2026-09, base months 237/240
+Monterey, CA 9413450: 634 months 1973-12..2026-09, base months 240/240
+San Francisco, CA 9414290: 673 months 1970-01..2026-10, base months 238/240
+Crescent City, CA 9419750: 681 months 1970-01..2026-10, base months 240/240
+Astoria, OR 9439040: 680 months 1970-01..2026-10, base months 240/240
+Neah Bay, WA 9443090: 672 months 1970-01..2026-10, base months 240/240
+Seattle, WA 9447130: 682 months 1970-01..2026-10, base months 240/240
+local_gauges_west.json: 11 gauges, 562 months to 2026-10; stations {'battery': '9410660', 'la_jolla': '9410230', 'san_diego': '9410170', 'santa_barbara': '9411340', 'port_san_luis': '9412110', 'monterey': '9413450', 'san_francisco': '9414290', 'crescent_city': '9419750', 'astoria': '9439040', 'neah_bay': '9443090', 'seattle': '9447130'}
+### export
+threshold 0.1204 m; all seasons n 46: RR 2.277 [1.726, 3.003] p 5.8e-09, LOO RR [2.215369095094079, 2.541185541948864]; test skill 0.462 (train RR 2.300); strong El Nino {'1982': 25.0, '1987': 2.0, '1997': 23.0, '2015': 18.0, '2023': 10.0} mean 15.6 vs avg 5.3
+outlook 2026-10..2027-04: Aug ENSO +2.77 SD -> 36.2 [7.1, 186.2] vs trend 3.4, extrapolation True
+lead curve oni m8: RR 2.352 [1.764, 3.137] p 5.8e-09 LOO +0.388
+lead curve nino34_giss m6: RR 3.506 [2.119, 5.800] p 1e-06 LOO +0.369
+globe outlook oni m5: +1.62 SD -> 8.7 [3.6, 21.4] vs trend 3.4 (beyond observed)
+globe outlook oni m6: +2.15 SD -> 19.6 [8.0, 48.2] vs trend 3.4 (beyond observed)
+globe outlook oni m7: +2.64 SD -> 25.0 [11.0, 56.8] vs trend 3.4 (beyond observed)
+globe outlook oni m8: +3.06 SD -> 24.7 [10.8, 56.3] vs trend 3.4 (beyond observed)
+globe outlook oni m9: +3.43 SD -> 24.3 [10.8, 54.7] vs trend 3.4 (beyond observed)
+globe outlook nino34_giss m5: +1.23 SD -> 7.4 [3.2, 17.4] vs trend 3.4
+globe outlook nino34_giss m6: +1.85 SD -> 19.7 [8.0, 48.2] vs trend 3.4 (beyond observed)
+globe outlook nino34_giss m7: +2.15 SD -> 19.1 [8.8, 41.6] vs trend 3.4 (beyond observed)
+globe outlook nino34_giss m8: +2.60 SD -> 21.7 [9.7, 48.4] vs trend 3.4 (beyond observed)
+globe outlook nino34_giss m9: +2.87 SD -> 22.6 [9.6, 52.9] vs trend 3.4 (beyond observed)
+winters 45, screen {'mean NTR, all months': {'tests': 348, 'discoveries': 13, 'confirmed': 3}, 'mean NTR, cool months': {'tests': 348, 'discoveries': 16, 'confirmed': 2}, 'surge days, cool months': {'tests': 348, 'discoveries': 0, 'confirmed': 0}}, surge_dates top [{'date': '2017-02-18', 'surge_m': 0.306}, {'date': '2024-02-06', 'surge_m': 0.201}, {'date': '2015-12-11', 'surge_m': 0.174}]

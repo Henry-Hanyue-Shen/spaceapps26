@@ -1,0 +1,5 @@
+data_raw/
+data_processed/*.nc
+__pycache__/
+*.pyc
+.mplconfig/

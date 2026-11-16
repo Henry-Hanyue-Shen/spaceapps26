@@ -1,0 +1,241 @@
+% Numerical experiment plan for the NASA Space Apps 2026 entry "Sea Level Detective"
+% Same visual style as the argument tree. Compile with pdflatex (twice).
+\documentclass[10pt]{article}
+\usepackage{mathptmx}\usepackage[scaled=0.9]{helvet}\usepackage[T1]{fontenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[most]{tcolorbox}
+\usepackage{booktabs,tabularx,enumitem,xcolor,longtable}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\setlist{nosep,leftmargin=1.2em}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\setlength{\parindent}{0pt}
+
+\tcbset{evbase/.style={enhanced,breakable,sharp corners,boxrule=0.4pt,colframe=black!70,colback=white,
+  fonttitle=\sffamily\bfseries\footnotesize,fontupper=\small,left=4pt,right=4pt,top=2pt,bottom=2pt,
+  boxsep=1pt,toptitle=1pt,bottomtitle=1pt,before skip=4pt,after skip=4pt}}
+\newtcolorbox{nubox}[1][NUMERICAL EXPERIMENT]{evbase,colbacktitle=black!20,coltitle=black,title={#1}}
+\newtcolorbox{cabox}[1][CAVEATS AND BOUNDARIES]{evbase,colback=black!4,colbacktitle=black!4,coltitle=black,
+  borderline={0.4pt}{0pt}{black!70,dashed},boxrule=0pt,title={#1}}
+\newtcolorbox{expbox}[1]{enhanced,sharp corners,boxrule=0pt,colback=white,colframe=white,
+  borderline north={1.2pt}{0pt}{black},borderline south={0.4pt}{0pt}{black},
+  colbacktitle=white,coltitle=black,title={#1},fonttitle=\sffamily\bfseries\large,
+  fontupper=\small\itshape,left=0pt,right=0pt,top=1pt,bottom=4pt,toptitle=4pt,bottomtitle=0pt,
+  before skip=8pt,after skip=4pt}
+% one row of an experiment card
+\newcommand{\row}[2]{\textbf{\sffamily\footnotesize #1} & #2\\}
+\newcommand{\card}[1]{\begin{nubox}[]\begin{tabularx}{\linewidth}{@{}p{2.3cm} Y@{}}#1\end{tabularx}\end{nubox}}
+
+\begin{document}
+\begin{center}
+{\sffamily\LARGE\bfseries Numerical Experiment Plan: Sea Level Detective}\\[4pt]
+{\small NASA Space Apps 2026 \textperiodcentered{} built around the argument tree (claims C1--C5) \textperiodcentered{} status 2026-11-14}\\[2pt]
+{\footnotesize Rule: every experiment is placed next to a published number (the \emph{anchor}). An anchor mismatch requires diagnosis
+(different data, period, corrections or method), not automatic classification as a bug or a finding.}
+\end{center}
+\vspace{-4pt}\noindent\rule{\linewidth}{0.8pt}
+
+\begin{tcolorbox}[enhanced,sharp corners,boxrule=0.6pt,colframe=black,colback=black!5,colbacktitle=black,coltitle=white,
+  title={OVERVIEW},fonttitle=\sffamily\bfseries\footnotesize,fontupper=\small,left=5pt,right=5pt,toptitle=1pt,bottomtitle=1pt]
+\begin{tabularx}{\linewidth}{@{}l l Y l l@{}}
+\toprule
+ID & Claim & Question & Priority & Time\\\midrule
+E0 & C1.1 & Does our NASA-SSH global series match NASA's own GMSL indicator, and what rate and acceleration result? & must & 3 h\\
+E1 & C3.1--3.2 & Do our tests keep a 5\% false-positive rate, and how many years do they need? (synthetic, no login) & must & 2 h\\
+E2 & C2.1--2.2 & Does the El Ni\~no regression show the west--east seesaw? (two boxes + map) & must & 2 h\\
+E3 & C2.3, C3.3 & How much do 10-year trends scatter, raw vs ENSO-removed? (descriptive) & must & 1 h\\
+E4 & C4.1--4.2 & ENSO at U.S. tide gauges (no login); box vs gauge agreement (with NASA data) & must & 3 h\\
+E5 & C2.4 & Does ENSO removal reproduce the 2010--11 dip and the vanishing ``slowdown''? & should & 1 h\\
+E6 & C1.2 & What share of the ocean has a significant local trend once natural variability counts? & should & 2 h\\
+E7 & C5 & Do 1997--98, 2015--16 and 2023--24 Kelvin waves travel at theoretical speed? & could & 2 h\\
+E8 & C4.4 & How large was the 2023 Panama rainfall deficit in GPM? & could & 1 h\\\bottomrule
+\end{tabularx}
+\textbf{Status 2026-11-14 19:20 UTC:} S (pipeline, data standard, 29 unit tests passing), E1 and the gauge part of E4 are \textbf{done}
+(\texttt{pipeline/results/summary.md}). E0, E2, E3 and the E4 satellite part wait for an Earthdata token.
+Must is about 11 h of analysis, plus setup and download (S, about 3 h including retries). Run the parts that need no login (E1, E4 gauges)
+first, while the NASA files download. The pipeline is in \texttt{pipeline/}; \texttt{run\_all.py --no-nasa} runs those parts.
+\end{tcolorbox}
+
+\begin{expbox}{D. NASA datasets available (checked in NASA's CMR catalogue, 2026-11-14)}
+Coverage as listed in CMR. All PO.DAAC and GES DISC data need a free Earthdata login. \emph{Use} names the experiments that need each dataset.
+\end{expbox}
+\begin{nubox}[]
+\footnotesize
+\begin{tabularx}{\linewidth}{@{}l l l Y l@{}}
+\toprule
+Tier & Short name (provider) & Coverage & What it is & Use\\\midrule
+core & \texttt{NASA\_SSH\_REF\_SIMPLE\_GRID\_V1} (PO.DAAC) & 1992-10 -- now & SSH anomaly, 0.5\textdegree, every 7 days, reference missions & all\\
+core & \texttt{NASA\_SSH\_GMSL\_INDICATOR} (PO.DAAC) & 1993-01 -- now & NASA global mean sea level from the same grid & E0, E5\\
+core & \texttt{NASA\_SSH\_ENSO\_INDICATOR} (PO.DAAC) & 1993-01 -- now & NASA ENSO index from sea-surface height & E1--E6\\
+core & \texttt{NASA\_SSH\_PDO\_INDICATOR} (PO.DAAC) & 1993-01 -- now & NASA Pacific Decadal Oscillation index from SSH & E3\\
+support & \texttt{MERGED\_TP\_J1\_OSTM\_OST\_GMSL\_ASCII\_V52} (PO.DAAC) & 1992-09 -- & MEaSUREs multi-mission GMSL (independent processing) & E0 check\\
+support & \texttt{TELLUS\_GRAC-GRFO\_MASCON\_CRI\_GRID\_RL06.3\_V4} (PO.DAAC) & 2002-04 -- now & GRACE/GRACE-FO mass (ocean + land water) & E5 mechanism\\
+support & \texttt{HOMAGE\_STERIC\_OHC\_TIME\_SERIES\_v01} (PO.DAAC) & 1978 -- & global steric height / ocean heat content & E5 mechanism\\
+optional & \texttt{GPM\_3IMERGM} v07 (GES DISC) & 1998-01 -- 2025-09 & monthly precipitation, 0.1\textdegree & E8\\
+optional & \texttt{CCMP\_WINDS\_10M6HR\_L4\_V3.1} (PO.DAAC) & 1993-01 -- now & 6-hourly 10 m winds, 0.25\textdegree & E7 (forcing)\\
+optional & \texttt{SWOT\_L2\_LR\_SSH\_BASIC\_D} (PO.DAAC) & 2022-12 -- now & 2 km swath SSH & site visual only\\
+optional & \texttt{M2TMNXSLV} (GES DISC) & 1980-01 -- now & MERRA-2 monthly surface fields (pressure, wind) & E4 (East Coast)\\
+not used & OSCAR, MUR SST, SMAP SSS (PO.DAAC) & various & currents, SST, salinity & out of scope\\\bottomrule
+\end{tabularx}
+\end{nubox}
+\begin{cabox}[DATASET NOTES (FROM THE NASA-SSH INDICATORS USER GUIDE, READ 2026-11-14)]
+\textbf{Indicators.} ENSO, PDO and IOD indicators are the second (``indicator'') mode of regional cyclostationary EOFs of the NASA-SSH grid,
+computed over 1993--2019 after removing each cell's linear trend; the first mode is the seasonal cycle. The modes are projected onto
+along-track SSH to give a time series to the present. They are ASCII files. Because they are built from the same SSH, regressing SSH on them
+partly explains SSH by itself. We therefore report every ENSO-removed result twice: with the NASA ENSO indicator (the site default) and with
+NOAA's SST-based ONI (independent). \textbf{GMSL indicator}: area-weighted mean of the same grid, in \textbf{cm}, 7-day steps, \textbf{not}
+GIA-corrected (DOI 10.5067/NSIND-GMSV1).
+\textbf{Access.} Every NASA file above needs a free Earthdata login (tested: PO.DAAC and GES DISC HTTPS and OPeNDAP return 401 or a login
+redirect without one). No public mirror holds the long NASA-SSH record: NOAA ERDDAP's altimetry starts in 2017, and NASA's sea-level web pages
+host no data files. NOAA tide gauges and ONI need no login.
+\textbf{Other.} GPM IMERG Final monthly ends 2025-09 in CMR, which is enough for 2023. The GRACE CRI mascon gives the ocean-mass vs
+land-water split that Boening et al.\ used for the 2010--11 dip.
+\end{cabox}
+
+\begin{expbox}{Shared setup (S)}
+One pipeline, built once, used by every experiment.
+\end{expbox}
+\card{
+\row{Data}{Core NASA set (table D below): the NASA-SSH grid (about 1{,}700 weekly files, about 2 GB), plus NASA's own GMSL, ENSO and PDO
+sea-surface-height indicators, so the El Ni\~no removal uses a NASA index. NOAA ONI is a cross-check only. NOAA CO-OPS monthly mean sea level for the
+Battery 8518750, La Jolla 9410230 and San Francisco 9414290 (public API) is the only non-NASA input.}
+\row{Access}{Earthdata login is needed for every NASA file. Set \texttt{EARTHDATA\_TOKEN} in the environment (never in code), then run
+\texttt{fetch\_nasa.py}. Alternatively, the professor runs the download with his token and shares \texttt{box\_monthly.csv} and the 1\textdegree{}
+grid. Smoke-test one grid file first (variable \texttt{ssha} in metres; \texttt{latitude}, \texttt{longitude}).}
+\row{Processing}{Weekly to monthly means (removes the 10-day window overlap). Area-weighted ($\cos\varphi$) box means.
+Monthly climatology removed (deseasonalized). Output: one compact NetCDF/CSV of monthly series per box plus a 1\textdegree{} monthly grid.}
+\row{Boxes}{Global ($\pm66$\textdegree), W.\ Pacific (5\textdegree S--5\textdegree N, 120\textdegree E--160\textdegree E), E.\ Pacific
+(5\textdegree S--5\textdegree N, 150\textdegree W--90\textdegree W), California shelf, NY Bight shelf, Panama (rain only). Fixed
+before looking at results.}
+\row{Statistics}{Sen slope with CI; Hamed--Rao modified Mann--Kendall; seasonal Kendall (Hirsch et al.\ 1982); OLS with AR(1)-adjusted
+CI as cross-check. ENSO removal: a \emph{joint} fit of trend + annual/semiannual harmonics + index at a lag fixed in advance (0; lags 0--6
+shown only as a sensitivity table). Subtract only the fitted index component. Run with the NASA ENSO indicator and with ONI. Monthly
+averaging does not remove autocorrelation, so the AR(1)-aware tests are always used.}
+\row{Tools}{Python: xarray, netCDF4, earthaccess, numpy, scipy, statsmodels, pymannkendall. Laptop is enough (RTX 4060 not needed).}
+}
+
+% ---------------------------------------------------------------- E0
+\begin{expbox}{E0. Reproduce the global rate and acceleration (C1.1) \hfill must}
+If this fails, nothing downstream can be trusted.
+\end{expbox}
+\card{
+\row{Method}{Global box, monthly, 1993-01 to 2017-12 (Nerem's window). Quadratic fit: rate at the window centre and $2\times$ the quadratic
+coefficient. Repeat with ONI regressed out, and on 1993--latest.}
+\row{Anchor}{Nerem et al.\ 2018, \emph{context only}: about 3 $\pm$ 0.4 mm/yr. Their acceleration is 0.097 mm/yr$^2$ before and 0.084 after
+the Pinatubo and ENSO adjustments (multivariate EOF, not ONI regression). They apply GIA; the NASA GMSL indicator does not.}
+\row{Check}{Validation against matched \texttt{NASA\_SSH\_GMSL\_INDICATOR} (same grid, cm converted to mm, matched timestamps): bias, RMSE and
+trend difference, not correlation alone. Then report our rate and acceleration with CIs, uncorrected for GIA, next to Nerem's. Not a pass gate.}
+\row{Site output}{Global curve with the fitted quadratic; the ``Global'' demo example.}
+}
+
+% ---------------------------------------------------------------- E1
+\begin{expbox}{E1. Validate the trend tests on synthetic series (C3.1, C3.2) \hfill must}
+Makes ``significant'' on the site mean what it says.
+\end{expbox}
+\card{
+\row{Method}{Monte Carlo, $\geq$1{,}000 series per setting: trend $\omega$ + seasonal cycle + monthly AR(1) noise with \emph{marginal} SD
+$\sigma_N$ and $\varphi$ (estimated from deseasonalized gauge residuals now, from the NASA boxes later). Lengths 10--35 years in 5-year steps;
+$\omega \in \{0,\ldots,4\}$ mm/yr. Tests: naive OLS, MK, Hamed--Rao MK, seasonal Kendall, AR(1)-OLS. False-positive rates with binomial
+95\% CIs; power curves; the 90\% power crossing interpolated. A separate run adds an ENSO-like term (empirical power only).}
+\row{Anchor}{Weatherhead et al.\ 1998, \emph{plain AR(1) case only}: $n^* \approx \big[(3.3\,\sigma_N/|\omega|)\sqrt{(1+\varphi)/(1-\varphi)}\big]^{2/3}$
+years (90\% power, 5\% level; monthly stationary AR(1), marginal SD). Hamed and Rao 1998: plain MK over-rejects under positive autocorrelation.}
+\row{Read-out}{Which tests hold about 5\% at $\omega=0$ (naive OLS and plain MK are expected not to). AR(1)-OLS crossing next to $n^*$.}
+\row{Site output}{``How many years do you need?'' panel per region; justifies the test the site uses.}
+}
+
+% ---------------------------------------------------------------- E2
+\begin{expbox}{E2. The El Ni\~no seesaw (C2.1, C2.2) \hfill must}
+The picture that makes the story.
+\end{expbox}
+\card{
+\row{Method}{Per 1\textdegree{} cell, regress deseasonalized SSHA on ONI (fixed lag): map of mm per \textdegree C of ONI. W vs E Pacific
+box series 1993--latest with El Ni\~no years shaded. Peak 2015/16 anomalies per box.}
+\row{Anchor}{Alory and Delcroix 2002: zonal seesaw with its fulcrum at the dateline. Widlansky et al.\ 2017: western Pacific drops exceeding
+30 cm in 2015/16 (island tide gauges).}
+\row{Read-out}{Where the regression coefficient changes sign along the equator; the W and E box anomalies in 1997/98, 2015/16 and 2023/24,
+next to the published island values (box means are expected to be smaller than island extremes). Descriptive, no gate.}
+\row{Site output}{Seesaw map + the two-box time series: demo example 1, ``same cause, opposite trends''.}
+}
+
+% ---------------------------------------------------------------- E3
+\begin{expbox}{E3. The short-window trap (C2.3, C3.3) \hfill must}
+Quantifies ``short records mislead''.
+\end{expbox}
+\card{
+\row{Method}{For every box: Sen slope over every 10-year window (sliding monthly) vs the full-record slope, raw and ENSO-removed. Overlapping
+windows are dependent: the spread is descriptive, not a sample of independent replications.}
+\row{Anchor}{Zhang and Church 2012, \emph{context only}: Jan 1993--Jun 2009, 50\textdegree S--60\textdegree N, 100\textdegree E--70\textdegree W,
+high-pass MEI and low-pass PDO (25/37-month filters), 5-month smoothing; about 20\% vs almost 60\% of basin variance. Our box $R^2$ is not
+comparable unless that setup is rebuilt (stretch goal).}
+\row{Read-out}{Window-slope distributions per box, raw vs ENSO-removed, and their $R^2$ with and without the index. No gate.}
+\row{Site output}{The window slider and the ``remove El Ni\~no'' toggle: demo example 4, ``the window trap''.}
+}
+
+% ---------------------------------------------------------------- E4
+\begin{expbox}{E4. U.S. coasts: satellite vs tide gauge, ENSO amplitude (C4.1, C4.2) \hfill must}
+Grounds the local panels; checks that 0.5\textdegree{} boxes mean something at the coast.
+\end{expbox}
+\card{
+\row{Method}{Deseasonalized monthly series: California box vs La Jolla and San Francisco; NY Bight box vs the Battery. Correlation, trend
+difference. ENSO regression amplitude at each gauge, peak 1997/98 and 2015/16 anomalies. Battery: cool-season (Oct--Apr) mean anomaly,
+El Ni\~no winters vs others (Welch and permutation tests). Surge-day counts need daily data: deferred.}
+\row{Anchor}{Hamlington et al.\ 2015: ENSO contributes up to 20 cm along the U.S. West Coast. Sweet and Zervas 2011: more cool-season surge
+days in El Ni\~no at four East Coast gauges. Colle et al.\ 2010: no statistically established ENSO link for New York.}
+\row{Read-out}{Peak ENSO-related anomalies at La Jolla/SF next to Hamlington's ``up to 20 cm'' (an upper envelope, not a target). Box--gauge
+correlation as found; trend differences discussed as land motion (gauges) vs geocentric (altimetry). Battery comparison reported as found.}
+\row{Site output}{California and New York demo panels with gauge overlay.}
+}
+
+% ---------------------------------------------------------------- E5--E8
+\begin{expbox}{E5. Global dip and ``slowdown'' (C2.4) \hfill should}
+Shows El Ni\~no matters even for the global number.
+\end{expbox}
+\card{
+\row{Method}{Global series 2010--2012 drop (our grid vs \texttt{NASA\_SSH\_GMSL\_INDICATOR}); GRACE ocean mass over the same months for the
+mechanism; trend 2005--2014 raw vs ENSO-removed.}
+\row{Anchor}{Boening et al.\ 2012: about 5 mm drop, early 2010 to mid 2011. Cazenave et al.\ 2014: slowdown disappears after correction
+(read the paper before using this anchor).}
+\row{Read-out}{Size and timing of the 2010--11 drop next to Boening's 5 mm; GRACE mass change over the same months; 2005--2014 slopes, raw and corrected. No gate.}
+}
+
+\begin{expbox}{E6. Local significance map (C1.2) \hfill should}
+How much of the ocean shows a real rise once natural variability is in the noise.
+\end{expbox}
+\card{
+\row{Method}{Per 1\textdegree{} cell 1993--2019: Sen slope, Hamed--Rao $p$, with and without ENSO removal. Area fraction significant at 5\%.}
+\row{Anchor}{Prandi et al.\ 2021: 98\% of the ocean rising significantly, but with measurement error only.}
+\row{Read-out}{A separate descriptive map. Prandi uses 90\% confidence, a measurement-error covariance and other data and estimators, so the two
+fractions are not directly comparable. Field significance is not claimed.}
+}
+
+\begin{expbox}{E7. Kelvin-wave speeds, three El Ni\~nos (C5) \hfill could}
+Extends the professor's 2015--16 analysis; feeds the explainer page.
+\end{expbox}
+\card{
+\row{Method}{Professor's slant-stack and $k$--$\omega$ code on 2\textdegree S--2\textdegree N for 1997--98, 2015--16, 2023--24 (weekly data).}
+\row{Anchor}{Boulanger and Menkes 1995: Kelvin and first Rossby waves at theoretical speeds. Professor's 2015--16: +1.50 / +1.62 m/s.}
+\row{Pass}{Eastward speeds consistent across events and with first-mode theory, or the difference explained (e.g.\ higher modes).}
+}
+
+\begin{expbox}{E8. Panama 2023 rainfall (C4.4) \hfill could}
+Only if E0--E4 are done.
+\end{expbox}
+\card{
+\row{Method}{GPM IMERG monthly over the canal watershed, 2001--latest; 2023 May--Dec anomaly vs climatology; ONI correlation of rainy-season totals.}
+\row{Anchor}{World Weather Attribution 2024: low 2023 rainy-season rainfall; about 8\% less rain in an El Ni\~no year.}
+\row{Pass}{2023 among the driest rainy seasons in the record; sign of the ONI correlation negative.}
+}
+
+\begin{cabox}[RULES FOR ALL EXPERIMENTS]
+Boxes, lag and tests are fixed before results are seen. Every reported trend carries its window, $n$ (months), method and CI. Anchors are
+context: a mismatch is diagnosed (data, period, corrections, method), never tuned away. ``Not significant'' is shown as such. No PINN retraining.
+Plan revised after a feasibility review by Codex, 2026-11-14.
+\end{cabox}
+
+\begin{cabox}[SCHEDULE (SAT NIGHT -- SUN)]
+Tonight: S (data + pipeline), E0, E1 in parallel (E1 needs no data). Sunday morning: E2, E3, E4. Midday: E5, E6 if on time; E7, E8 only
+if the site is already working. 14:00 Sunday: freeze numbers, fill the argument tree's numerical boxes, update the narrative verdicts.
+\end{cabox}
+\end{document}

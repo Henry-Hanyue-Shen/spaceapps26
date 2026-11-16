@@ -1,0 +1,534 @@
+{
+ "sources": {
+  "enso": "NOAA ONI (fallback)",
+  "nao": "NCEP/NCAR reanalysis SLP, station-style NAO (public)",
+  "wind": "NCEP/NCAR reanalysis NY Bight wind from NE (public)"
+ },
+ "train": [
+  "1993-01",
+  "2012-12"
+ ],
+ "test": [
+  "2013-01",
+  "2026-12"
+ ],
+ "surge_threshold_m": 0.12035250684931507,
+ "target_train_trend_mm_per_yr": -0.34824616232390354,
+ "lag_analysis": {
+  "enso": {
+   "all_months": {
+    "prewhiten_ar1": 0.9701428632037915,
+    "lags": [
+     {
+      "lag": 0,
+      "r": 0.2263280597143826,
+      "n": 240,
+      "z": 3.5062592242129664,
+      "significant": true
+     },
+     {
+      "lag": 1,
+      "r": 0.2707743956707882,
+      "n": 240,
+      "z": 4.194818900049362,
+      "significant": true
+     },
+     {
+      "lag": 2,
+      "r": 0.11052564597280666,
+      "n": 240,
+      "z": 1.7122559447259882,
+      "significant": false
+     },
+     {
+      "lag": 3,
+      "r": 0.057502119833570016,
+      "n": 240,
+      "z": 0.8908190099481595,
+      "significant": false
+     },
+     {
+      "lag": 4,
+      "r": -0.07851852369833051,
+      "n": 240,
+      "z": -1.216403738609706,
+      "significant": false
+     },
+     {
+      "lag": 5,
+      "r": -0.06695888196988577,
+      "n": 240,
+      "z": -1.0373225390001426,
+      "significant": false
+     },
+     {
+      "lag": 6,
+      "r": -0.11835307059753408,
+      "n": 240,
+      "z": -1.8335178855870409,
+      "significant": false
+     }
+    ]
+   },
+   "cool_season": {
+    "prewhiten_ar1": 0.9701428632037915,
+    "lags": [
+     {
+      "lag": 0,
+      "r": 0.22126510213203174,
+      "n": 120,
+      "z": 2.423837752527964,
+      "significant": false
+     },
+     {
+      "lag": 1,
+      "r": 0.274395862770744,
+      "n": 120,
+      "z": 3.00585607451257,
+      "significant": true
+     },
+     {
+      "lag": 2,
+      "r": 0.03761610030944294,
+      "n": 120,
+      "z": 0.4120637332971792,
+      "significant": false
+     },
+     {
+      "lag": 3,
+      "r": -0.0802910505459062,
+      "n": 120,
+      "z": -0.8795443909956061,
+      "significant": false
+     },
+     {
+      "lag": 4,
+      "r": -0.19268350879687457,
+      "n": 120,
+      "z": -2.1107420845458664,
+      "significant": false
+     },
+     {
+      "lag": 5,
+      "r": -0.08197337928756333,
+      "n": 120,
+      "z": -0.897973379014504,
+      "significant": false
+     },
+     {
+      "lag": 6,
+      "r": -0.0913370891889143,
+      "n": 120,
+      "z": -1.000547681712592,
+      "significant": false
+     }
+    ]
+   },
+   "best_lag_any": 1,
+   "best_lag_leading": 1
+  },
+  "nao": {
+   "all_months": {
+    "prewhiten_ar1": 0.15355548650450873,
+    "lags": [
+     {
+      "lag": 0,
+      "r": -0.13774410750317453,
+      "n": 240,
+      "z": -2.1339225375919963,
+      "significant": false
+     },
+     {
+      "lag": 1,
+      "r": -0.05240203989473895,
+      "n": 240,
+      "z": -0.8118089112784824,
+      "significant": false
+     },
+     {
+      "lag": 2,
+      "r": -0.14233668742705965,
+      "n": 240,
+      "z": -2.205070479837331,
+      "significant": false
+     },
+     {
+      "lag": 3,
+      "r": -0.04643305223585347,
+      "n": 240,
+      "z": -0.7193377520921582,
+      "significant": false
+     },
+     {
+      "lag": 4,
+      "r": -0.09108849158719662,
+      "n": 240,
+      "z": -1.4111368437934677,
+      "significant": false
+     },
+     {
+      "lag": 5,
+      "r": 0.02618385360877267,
+      "n": 240,
+      "z": 0.40563851586523814,
+      "significant": false
+     },
+     {
+      "lag": 6,
+      "r": -0.007930273091121789,
+      "n": 240,
+      "z": -0.12285526245116601,
+      "significant": false
+     }
+    ]
+   },
+   "cool_season": {
+    "prewhiten_ar1": 0.15355548650450873,
+    "lags": [
+     {
+      "lag": 0,
+      "r": -0.056582512041572545,
+      "n": 120,
+      "z": -0.6198303641095395,
+      "significant": false
+     },
+     {
+      "lag": 1,
+      "r": -0.11470291606467509,
+      "n": 120,
+      "z": -1.2565074908048848,
+      "significant": false
+     },
+     {
+      "lag": 2,
+      "r": -0.19089180590444202,
+      "n": 120,
+      "z": -2.0911149627352152,
+      "significant": false
+     },
+     {
+      "lag": 3,
+      "r": -0.05503772477410167,
+      "n": 120,
+      "z": -0.6029080674507281,
+      "significant": false
+     },
+     {
+      "lag": 4,
+      "r": -0.03940154387823432,
+      "n": 120,
+      "z": -0.4316222876527705,
+      "significant": false
+     },
+     {
+      "lag": 5,
+      "r": 0.01490062777270105,
+      "n": 120,
+      "z": 0.16322819904192654,
+      "significant": false
+     },
+     {
+      "lag": 6,
+      "r": -0.07719984499899055,
+      "n": 120,
+      "z": -0.8456819308369902,
+      "significant": false
+     }
+    ]
+   },
+   "best_lag_any": 2,
+   "best_lag_leading": 2
+  },
+  "wind": {
+   "all_months": {
+    "prewhiten_ar1": 0.076712771501187,
+    "lags": [
+     {
+      "lag": 0,
+      "r": 0.13312553946052552,
+      "n": 240,
+      "z": 2.0623719891419747,
+      "significant": false
+     },
+     {
+      "lag": 1,
+      "r": 0.17457074531649014,
+      "n": 240,
+      "z": 2.704438357383131,
+      "significant": true
+     },
+     {
+      "lag": 2,
+      "r": 0.12091971682742407,
+      "n": 240,
+      "z": 1.8732801980029208,
+      "significant": false
+     },
+     {
+      "lag": 3,
+      "r": 0.09522164905125512,
+      "n": 240,
+      "z": 1.4751674438956734,
+      "significant": false
+     },
+     {
+      "lag": 4,
+      "r": -0.0032815028733356386,
+      "n": 240,
+      "z": -0.05083682391584286,
+      "significant": false
+     },
+     {
+      "lag": 5,
+      "r": -0.07707508514373372,
+      "n": 240,
+      "z": -1.1940420846767976,
+      "significant": false
+     },
+     {
+      "lag": 6,
+      "r": -0.098449304992004,
+      "n": 240,
+      "z": -1.5251700747189048,
+      "significant": false
+     }
+    ]
+   },
+   "cool_season": {
+    "prewhiten_ar1": 0.076712771501187,
+    "lags": [
+     {
+      "lag": 0,
+      "r": 0.22053091907464686,
+      "n": 120,
+      "z": 2.415795180090608,
+      "significant": false
+     },
+     {
+      "lag": 1,
+      "r": 0.36102773390095655,
+      "n": 120,
+      "z": 3.9548606748505297,
+      "significant": true
+     },
+     {
+      "lag": 2,
+      "r": 0.22935942569730844,
+      "n": 120,
+      "z": 2.512506624616918,
+      "significant": false
+     },
+     {
+      "lag": 3,
+      "r": 0.16414264225607836,
+      "n": 120,
+      "z": 1.7980925562430958,
+      "significant": false
+     },
+     {
+      "lag": 4,
+      "r": 0.06245390052592112,
+      "n": 120,
+      "z": 0.684148202444615,
+      "significant": false
+     },
+     {
+      "lag": 5,
+      "r": 0.06868387357968639,
+      "n": 120,
+      "z": 0.7523941379285467,
+      "significant": false
+     },
+     {
+      "lag": 6,
+      "r": -0.14959093932405113,
+      "n": 120,
+      "z": -1.6386866373233882,
+      "significant": false
+     }
+    ]
+   },
+   "best_lag_any": 1,
+   "best_lag_leading": 1
+  }
+ },
+ "models": {
+  "persistence": {
+   "skill_vs_climatology": 0.7615153402942695,
+   "rmse_mm": 37.99816782473436,
+   "rmse_climatology_mm": 77.80946553302424,
+   "n_train": 240,
+   "n_test": 166,
+   "train_r2": 0.5200453030216207,
+   "coef": {
+    "const": -0.011294839096574055,
+    "persistence": 0.7210355570926119
+   }
+  },
+  "enso (best lag)": {
+   "skill_vs_climatology": 0.3347557616279073,
+   "rmse_mm": 58.810240122586876,
+   "rmse_climatology_mm": 72.10450366525127,
+   "n_train": 240,
+   "n_test": 165,
+   "train_r2": 0.45305916797938817,
+   "coef": {
+    "const": 0.0031559776211450945,
+    "enso_lag1": 30.24029401231345
+   }
+  },
+  "nao (best lag)": {
+   "skill_vs_climatology": -0.023245984196133662,
+   "rmse_mm": 69.13755460114218,
+   "rmse_climatology_mm": 68.34771345634019,
+   "n_train": 240,
+   "n_test": 160,
+   "train_r2": 0.021661339679378222,
+   "coef": {
+    "const": 0.06529596809350195,
+    "nao_lag2": -6.5620125143525705
+   }
+  },
+  "wind (best lag)": {
+   "skill_vs_climatology": 0.0036333150185304808,
+   "rmse_mm": 67.51989240479642,
+   "rmse_climatology_mm": 67.6428881878415,
+   "n_train": 240,
+   "n_test": 159,
+   "train_r2": 0.034524445834983375,
+   "coef": {
+    "const": -0.02910835195928492,
+    "wind_lag1": 8.334271852934691
+   }
+  },
+  "all concurrent (best lag 0-6)": {
+   "skill_vs_climatology": 0.28438316157978005,
+   "rmse_mm": 57.22191898138123,
+   "rmse_climatology_mm": 67.6428881878415,
+   "n_train": 240,
+   "n_test": 159,
+   "train_r2": 0.4637625402680273,
+   "coef": {
+    "const": 0.029370394991715437,
+    "enso_lag1": 29.384659193526765,
+    "nao_lag2": -3.6231261898281524,
+    "wind_lag1": 2.7911996518686113
+   }
+  },
+  "all leading (lag 1-6, forecast)": {
+   "skill_vs_climatology": 0.28438316157978005,
+   "rmse_mm": 57.22191898138123,
+   "rmse_climatology_mm": 67.6428881878415,
+   "n_train": 240,
+   "n_test": 159,
+   "train_r2": 0.4637625402680273,
+   "coef": {
+    "const": 0.029370394991715437,
+    "enso_lag1": 29.384659193526765,
+    "nao_lag2": -3.6231261898281524,
+    "wind_lag1": 2.7911996518686113
+   }
+  },
+  "all leading + persistence": {
+   "skill_vs_climatology": 0.694124805929503,
+   "rmse_mm": 37.41056537387763,
+   "rmse_climatology_mm": 67.6428881878415,
+   "n_train": 240,
+   "n_test": 159,
+   "train_r2": 0.5806160332034476,
+   "coef": {
+    "const": 0.018442126788204217,
+    "enso_lag1": 14.100435487786093,
+    "nao_lag2": -3.2316849811743893,
+    "wind_lag1": 2.1736513809999494,
+    "persistence": 0.48484252173050046
+   }
+  }
+ },
+ "surge_days_cool_season": {
+  "trend_only": {
+   "test_deviance": 195.9176458483625
+  },
+  "with_predictors": {
+   "test_deviance": 191.206610768655
+  },
+  "deviance_skill_vs_trend_only": 0.0240459967723059,
+  "rate_ratio_per_sd": {
+   "enso_lag1": {
+    "rr": 2.2267264694718727,
+    "ci95": [
+     1.591551903104858,
+     3.1153936985490795
+    ],
+    "p": 2.9806461741651256e-06
+   },
+   "nao_lag2": {
+    "rr": 1.163540500842758,
+    "ci95": [
+     0.76976233641979,
+     1.758759078026788
+    ],
+    "p": 0.47240566943691276
+   },
+   "wind_lag1": {
+    "rr": 1.196567558818438,
+    "ci95": [
+     0.8690037902677147,
+     1.6476037721027983
+    ],
+    "p": 0.2714982529678518
+   }
+  },
+  "n_train_months": 140,
+  "n_test_months": 94,
+  "mean_surge_days_per_cool_month_train": 0.7214285714285714
+ },
+ "season_outlook": {
+  "n_train_seasons": 32,
+  "n_test_seasons": 14,
+  "rate_ratio_per_sd": 2.3000890213671052,
+  "rate_ratio_ci95": [
+   1.5971274424569013,
+   3.3124529486983945
+  ],
+  "p": 7.608737616544278e-06,
+  "dispersion": 6.0443303816897025,
+  "test_deviance_skill_vs_trend_only": 0.4623638741486916,
+  "mean_surge_days_per_season_train": 5.84375,
+  "mean_surge_days_per_season_test": 4.0,
+  "all_seasons": {
+   "n": 46,
+   "rate_ratio_per_sd": 2.276523509704178,
+   "ci95": [
+    1.7257869554803251,
+    3.003012204825367
+   ],
+   "p": 5.83170310006134e-09,
+   "leave_one_out_rr_range": [
+    2.215369095094079,
+    2.541185541948864
+   ],
+   "leave_one_out_max_p": 2.439491115960871e-07
+  },
+  "strong_el_nino_seasons": {
+   "1982": 25.0,
+   "1987": 2.0,
+   "1997": 23.0,
+   "2015": 18.0,
+   "2023": 10.0
+  },
+  "observed_enso_aug_max_sd": 2.3087254678137215,
+  "outlook": {
+   "season": "2026-10..2027-04",
+   "enso_aug_sd": 2.77209862924094,
+   "expected_surge_days": 36.23674128916599,
+   "expected_ci95": [
+    7.0527599964967935,
+    186.18263203486057
+   ],
+   "trend_only_expected": 3.431230692355549,
+   "extrapolation": true,
+   "note": "Expected count with a 95% interval for the mean, not a prediction interval for one season."
+  }
+ }
+}

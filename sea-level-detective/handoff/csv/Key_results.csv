@@ -1,0 +1,15 @@
+result,value,interval_or_note,unit,where_to_find_it
+"Surge days per cool season at the Battery (mean, 1980-2025)",10.3,,days,Season_predictions
+"August El Nino (NOAA ONI): surge days multiplied by, per 1 SD (43 winters)",1.38,1.18 to 1.63,rate ratio,ENSO_lead_time
+"Same, leave-one-winter-out range",1.35 to 1.46,max p 0.0006,rate ratio,ntr/results/ntr.json
+"NASA GISTEMP Nino3.4, Jul-Sep: held-out skill (2010-2025) vs trend only",0.35,,deviance skill,Season_screening
+"NOAA ONI, Jul-Sep: held-out skill (2010-2025) vs trend only",0.21,,deviance skill,Season_screening
+"Best lead month (NASA Nino3.4): month 6, surge days multiplied by, per 1 SD",1.64,1.31 to 2.04,rate ratio,ENSO_lead_time
+"Held-out mean absolute error, trend only",4.22,,days per season,Season_predictions
+"Held-out mean absolute error, + ONI in August",3.67,,days per season,Season_predictions
+"Held-out mean absolute error, + NASA Nino3.4 in June",3.6,,days per season,Season_predictions
+Monthly screening: predictor x lead tests per target,348,,tests,Monthly_screening
+Monthly screening: leading signals that add skill beyond persistence,0,"1 confirmed on test (Portland, 1 month) but gain +0.001",signals,Monthly_screening
+Same-month model (wind + NAO + ONI): held-out skill for monthly mean NTR,0.32,,skill vs climatology,Monthly_models
+"Trend tests, 10-year records with no trend: false-alarm rate, naive OLS",0.405,should be 0.05,fraction,Trend_tests_E1
+"Same, AR(1)-adjusted OLS (the test used)",0.07,should be 0.05,fraction,Trend_tests_E1

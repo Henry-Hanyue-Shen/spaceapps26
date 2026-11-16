@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.mplconfig/
+.earthdata_token
+.netrc
+.env

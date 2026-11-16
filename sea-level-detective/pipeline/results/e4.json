@@ -1,0 +1,1035 @@
+{
+  "experiment": "E4",
+  "nasa_enabled": false,
+  "gauges": {
+    "8518750": {
+      "name": "The Battery",
+      "window": [
+        "1856-01-01",
+        "2026-10-01"
+      ],
+      "n": 1865,
+      "missing_months": 185,
+      "trends": [
+        {
+          "window": [
+            "1856-01-01",
+            "2026-10-01"
+          ],
+          "n": 1865,
+          "method": "Sen (independent-error rank CI)",
+          "trend_mm_yr": 2.962261938287181,
+          "ci95_mm_yr": [
+            2.9045357033404837,
+            3.0190082577390878
+          ]
+        },
+        {
+          "window": [
+            "1856-01-01",
+            "2026-10-01"
+          ],
+          "n": 1865,
+          "method": "Naive OLS",
+          "trend_mm_yr": 2.9555983152518426,
+          "ci95_mm_yr": [
+            2.8978225436116403,
+            3.013374086892045
+          ],
+          "se_mm_yr": 0.029458824964953452,
+          "p": 0.0,
+          "rho": 0.37488578020187435,
+          "n_eff": 1865.0,
+          "r2": 0.8438268972273425
+        },
+        {
+          "window": [
+            "1856-01-01",
+            "2026-10-01"
+          ],
+          "n": 1865,
+          "method": "Plain Mann-Kendall",
+          "trend_mm_yr": 2.962261938287181,
+          "ci95_mm_yr": [
+            2.9045357033404837,
+            3.0190082577390878
+          ],
+          "p": 0.0,
+          "z": 49.626576825843806,
+          "statistic_s": 1332864.0,
+          "ci_method": "Sen rank CI; independent errors (not Hamed-Rao adjusted)",
+          "missing_months": 185
+        },
+        {
+          "window": [
+            "1856-01-01",
+            "2026-10-01"
+          ],
+          "n": 1865,
+          "method": "Hamed-Rao Mann-Kendall",
+          "trend_mm_yr": 2.962261938287181,
+          "ci95_mm_yr": [
+            2.9045357033404837,
+            3.0190082577390878
+          ],
+          "p": 0.0,
+          "z": 24.1674976647576,
+          "statistic_s": 1332864.0,
+          "ci_method": "Sen rank CI; independent errors (not Hamed-Rao adjusted)",
+          "missing_months": 185
+        },
+        {
+          "window": [
+            "1856-01-01",
+            "2026-10-01"
+          ],
+          "n": 1865,
+          "method": "AR(1)-OLS effective sample size",
+          "trend_mm_yr": 2.9555983152518426,
+          "ci95_mm_yr": [
+            2.869847365737263,
+            3.041349264766422
+          ],
+          "se_mm_yr": 0.04368869185324101,
+          "p": 0.0,
+          "rho": 0.37488578020187435,
+          "n_eff": 847.9526348380186,
+          "r2": 0.8438268972273425
+        },
+        {
+          "window": [
+            "1856-01-01",
+            "2026-10-01"
+          ],
+          "n": 1865,
+          "method": "Seasonal Kendall (period 12)",
+          "trend_mm_yr": 2.9714285714285715,
+          "ci95_mm_yr": [
+            2.91044776119403,
+            3.019867549668874
+          ],
+          "p": 0.0,
+          "z": 49.53430150437235,
+          "statistic_s": 111343.0,
+          "ci_method": "Seasonal rank CI; independent years",
+          "missing_months": 185
+        }
+      ],
+      "oni_fit": {
+        "window": [
+          "1950-01-01",
+          "2026-09-01"
+        ],
+        "n": 921,
+        "method": "Joint trend + two harmonics + index; AR(1) CI",
+        "lag_months": 0,
+        "trend_mm_yr": 3.413487756162319,
+        "ci95_mm_yr": [
+          3.1398456921740814,
+          3.6871298201505565
+        ],
+        "index_coefficient": 8.90055987032846,
+        "index_ci95": [
+          1.259902378815542,
+          16.541217361841376
+        ],
+        "r2_with_index": 0.7079569608152398,
+        "r2_without_index": 0.7041022710871911,
+        "rho": 0.39395433003349123,
+        "n_eff": 400.42062355496546,
+        "index_coefficient_units": "mm per degree C ONI"
+      },
+      "peaks": [
+        {
+          "event": "1997/98",
+          "requested_window": [
+            "1997-01",
+            "1998-12"
+          ],
+          "window": [
+            "1997-01-01",
+            "1998-12-01"
+          ],
+          "n": 24,
+          "method": "Maximum detrended/deseasonalized monthly anomaly",
+          "peak_mm": 244.33178711654446,
+          "peak_month": "1998-02-01",
+          "ci95": null,
+          "ci_note": "Descriptive selected maximum; no confidence interval"
+        },
+        {
+          "event": "2015/16",
+          "requested_window": [
+            "2015-01",
+            "2016-12"
+          ],
+          "window": [
+            "2015-01-01",
+            "2016-12-01"
+          ],
+          "n": 24,
+          "method": "Maximum detrended/deseasonalized monthly anomaly",
+          "peak_mm": 51.64091346200195,
+          "peak_month": "2016-09-01",
+          "ci95": null,
+          "ci_note": "Descriptive selected maximum; no confidence interval"
+        }
+      ]
+    },
+    "9410230": {
+      "name": "La Jolla",
+      "window": [
+        "1924-11-01",
+        "2026-09-01"
+      ],
+      "n": 1188,
+      "missing_months": 35,
+      "trends": [
+        {
+          "window": [
+            "1924-11-01",
+            "2026-09-01"
+          ],
+          "n": 1188,
+          "method": "Sen (independent-error rank CI)",
+          "trend_mm_yr": 1.9889617122941505,
+          "ci95_mm_yr": [
+            1.906768267300529,
+            2.0701548821548825
+          ]
+        },
+        {
+          "window": [
+            "1924-11-01",
+            "2026-09-01"
+          ],
+          "n": 1188,
+          "method": "Naive OLS",
+          "trend_mm_yr": 2.0297572463342055,
+          "ci95_mm_yr": [
+            1.9425494497692044,
+            2.1169650428992064
+          ],
+          "se_mm_yr": 0.044449183484689056,
+          "p": 1.4736951760398451e-263,
+          "rho": 0.7225064165786146,
+          "n_eff": 1188.0,
+          "r2": 0.6374487872133735
+        },
+        {
+          "window": [
+            "1924-11-01",
+            "2026-09-01"
+          ],
+          "n": 1188,
+          "method": "Plain Mann-Kendall",
+          "trend_mm_yr": 1.9889617122941505,
+          "ci95_mm_yr": [
+            1.906768267300529,
+            2.0701548821548825
+          ],
+          "p": 0.0,
+          "z": 31.640110716242024,
+          "statistic_s": 432131.0,
+          "ci_method": "Sen rank CI; independent errors (not Hamed-Rao adjusted)",
+          "missing_months": 35
+        },
+        {
+          "window": [
+            "1924-11-01",
+            "2026-09-01"
+          ],
+          "n": 1188,
+          "method": "Hamed-Rao Mann-Kendall",
+          "trend_mm_yr": 1.9889617122941505,
+          "ci95_mm_yr": [
+            1.906768267300529,
+            2.0701548821548825
+          ],
+          "p": 0.0,
+          "z": 12.99666768169729,
+          "statistic_s": 432131.0,
+          "ci_method": "Sen rank CI; independent errors (not Hamed-Rao adjusted)",
+          "missing_months": 35
+        },
+        {
+          "window": [
+            "1924-11-01",
+            "2026-09-01"
+          ],
+          "n": 1188,
+          "method": "AR(1)-OLS effective sample size",
+          "trend_mm_yr": 2.0297572463342055,
+          "ci95_mm_yr": [
+            1.8113082813430281,
+            2.248206211325383
+          ],
+          "se_mm_yr": 0.11074337098344626,
+          "p": 7.988054560758264e-44,
+          "rho": 0.7225064165786146,
+          "n_eff": 191.38528247657194,
+          "r2": 0.6374487872133735
+        },
+        {
+          "window": [
+            "1924-11-01",
+            "2026-09-01"
+          ],
+          "n": 1188,
+          "method": "Seasonal Kendall (period 12)",
+          "trend_mm_yr": 2.0,
+          "ci95_mm_yr": [
+            1.9142857142857144,
+            2.0714285714285716
+          ],
+          "p": 0.0,
+          "z": 31.52675983586975,
+          "statistic_s": 36122.0,
+          "ci_method": "Seasonal rank CI; independent years",
+          "missing_months": 35
+        }
+      ],
+      "oni_fit": {
+        "window": [
+          "1950-01-01",
+          "2026-09-01"
+        ],
+        "n": 899,
+        "method": "Joint trend + two harmonics + index; AR(1) CI",
+        "lag_months": 0,
+        "trend_mm_yr": 2.0713581795141645,
+        "ci95_mm_yr": [
+          1.854155775468271,
+          2.288560583560058
+        ],
+        "index_coefficient": 37.83457532891686,
+        "index_ci95": [
+          31.88838044415786,
+          43.780770213675865
+        ],
+        "r2_with_index": 0.8094483570338118,
+        "r2_without_index": 0.6800729876544857,
+        "rho": 0.5878479938057751,
+        "n_eff": 233.3502041845516,
+        "index_coefficient_units": "mm per degree C ONI"
+      },
+      "peaks": [
+        {
+          "event": "1997/98",
+          "requested_window": [
+            "1997-01",
+            "1998-12"
+          ],
+          "window": [
+            "1997-01-01",
+            "1998-12-01"
+          ],
+          "n": 24,
+          "method": "Maximum detrended/deseasonalized monthly anomaly",
+          "peak_mm": 206.6429842071571,
+          "peak_month": "1997-11-01",
+          "ci95": null,
+          "ci_note": "Descriptive selected maximum; no confidence interval"
+        },
+        {
+          "event": "2015/16",
+          "requested_window": [
+            "2015-01",
+            "2016-12"
+          ],
+          "window": [
+            "2015-01-01",
+            "2016-12-01"
+          ],
+          "n": 24,
+          "method": "Maximum detrended/deseasonalized monthly anomaly",
+          "peak_mm": 164.54366162035444,
+          "peak_month": "2015-10-01",
+          "ci95": null,
+          "ci_note": "Descriptive selected maximum; no confidence interval"
+        }
+      ]
+    },
+    "9414290": {
+      "name": "San Francisco",
+      "window": [
+        "1854-07-01",
+        "2026-10-01"
+      ],
+      "n": 2059,
+      "missing_months": 9,
+      "trends": [
+        {
+          "window": [
+            "1854-07-01",
+            "2026-10-01"
+          ],
+          "n": 2059,
+          "method": "Sen (independent-error rank CI)",
+          "trend_mm_yr": 1.5322259709745198,
+          "ci95_mm_yr": [
+            1.4789155211938163,
+            1.585406291624039
+          ]
+        },
+        {
+          "window": [
+            "1854-07-01",
+            "2026-10-01"
+          ],
+          "n": 2059,
+          "method": "Naive OLS",
+          "trend_mm_yr": 1.5309494897142193,
+          "ci95_mm_yr": [
+            1.4770663484298847,
+            1.5848326309985539
+          ],
+          "se_mm_yr": 0.027475727365343487,
+          "p": 0.0,
+          "rho": 0.6911677411517617,
+          "n_eff": 2059.0,
+          "r2": 0.6014899165169714
+        },
+        {
+          "window": [
+            "1854-07-01",
+            "2026-10-01"
+          ],
+          "n": 2059,
+          "method": "Plain Mann-Kendall",
+          "trend_mm_yr": 1.5322259709745198,
+          "ci95_mm_yr": [
+            1.4789155211938163,
+            1.585406291624039
+          ],
+          "p": 0.0,
+          "z": 40.55050776218563,
+          "statistic_s": 1263332.0,
+          "ci_method": "Sen rank CI; independent errors (not Hamed-Rao adjusted)",
+          "missing_months": 9
+        },
+        {
+          "window": [
+            "1854-07-01",
+            "2026-10-01"
+          ],
+          "n": 2059,
+          "method": "Hamed-Rao Mann-Kendall",
+          "trend_mm_yr": 1.5322259709745198,
+          "ci95_mm_yr": [
+            1.4789155211938163,
+            1.585406291624039
+          ],
+          "p": 2.6423307986078726e-14,
+          "z": 7.614595122934961,
+          "statistic_s": 1263332.0,
+          "ci_method": "Sen rank CI; independent errors (not Hamed-Rao adjusted)",
+          "missing_months": 9
+        },
+        {
+          "window": [
+            "1854-07-01",
+            "2026-10-01"
+          ],
+          "n": 2059,
+          "method": "AR(1)-OLS effective sample size",
+          "trend_mm_yr": 1.5309494897142193,
+          "ci95_mm_yr": [
+            1.4045233198991813,
+            1.6573756595292573
+          ],
+          "se_mm_yr": 0.06429559390822905,
+          "p": 6.202971974522899e-77,
+          "rho": 0.6911677411517617,
+          "n_eff": 376.00387323817785,
+          "r2": 0.6014899165169714
+        },
+        {
+          "window": [
+            "1854-07-01",
+            "2026-10-01"
+          ],
+          "n": 2059,
+          "method": "Seasonal Kendall (period 12)",
+          "trend_mm_yr": 1.5348837209302326,
+          "ci95_mm_yr": [
+            1.486842105263158,
+            1.5866666666666667
+          ],
+          "p": 0.0,
+          "z": 40.80465690051605,
+          "statistic_s": 106345.0,
+          "ci_method": "Seasonal rank CI; independent years",
+          "missing_months": 9
+        }
+      ],
+      "oni_fit": {
+        "window": [
+          "1950-01-01",
+          "2026-09-01"
+        ],
+        "n": 912,
+        "method": "Joint trend + two harmonics + index; AR(1) CI",
+        "lag_months": 0,
+        "trend_mm_yr": 1.9745229292940865,
+        "ci95_mm_yr": [
+          1.695032219721917,
+          2.254013638866256
+        ],
+        "index_coefficient": 39.7435171736804,
+        "index_ci95": [
+          31.97487911066074,
+          47.51215523670007
+        ],
+        "r2_with_index": 0.6088432995845858,
+        "r2_without_index": 0.4641556142589891,
+        "rho": 0.5348552320826008,
+        "n_eff": 276.3856938905352,
+        "index_coefficient_units": "mm per degree C ONI"
+      },
+      "peaks": [
+        {
+          "event": "1997/98",
+          "requested_window": [
+            "1997-01",
+            "1998-12"
+          ],
+          "window": [
+            "1997-01-01",
+            "1998-12-01"
+          ],
+          "n": 24,
+          "method": "Maximum detrended/deseasonalized monthly anomaly",
+          "peak_mm": 297.9129268245144,
+          "peak_month": "1998-02-01",
+          "ci95": null,
+          "ci_note": "Descriptive selected maximum; no confidence interval"
+        },
+        {
+          "event": "2015/16",
+          "requested_window": [
+            "2015-01",
+            "2016-12"
+          ],
+          "window": [
+            "2015-01-01",
+            "2016-12-01"
+          ],
+          "n": 24,
+          "method": "Maximum detrended/deseasonalized monthly anomaly",
+          "peak_mm": 150.23122704228098,
+          "peak_month": "2015-10-01",
+          "ci95": null,
+          "ci_note": "Descriptive selected maximum; no confidence interval"
+        }
+      ]
+    }
+  },
+  "notes": [
+    "Gauge records are relative sea level on datum MSL; no vertical-land-motion or GIA correction.",
+    "Nonseasonal trend methods use deseasonalized monthly values; seasonal Kendall uses raw monthly values.",
+    "Peaks are observed monthly maxima after full-record climatology and linear detrending; no inferential CI for a selected maximum.",
+    "Hamed-Rao p-values compress missing months; gap counts are reported. Sen intervals are independent-error rank intervals."
+  ],
+  "battery_winters": {
+    "window": [
+      "1949-10-01",
+      "2026-04-01"
+    ],
+    "n": 77,
+    "method": "Complete 7-month Oct-Apr detrended/deseasonalized anomalies; DJF ONI >=0.5 C",
+    "el_nino": {
+      "n": 25,
+      "mean_mm": 12.397257250987453,
+      "ci95_mm": [
+        -14.202848558288581,
+        38.99736306026349
+      ]
+    },
+    "other": {
+      "n": 52,
+      "mean_mm": -2.6467466289039523,
+      "ci95_mm": [
+        -13.40594238099246,
+        8.112449123184557
+      ]
+    },
+    "difference_mm": 15.044003879891406,
+    "ci95_mm": [
+      -13.368656728502568,
+      43.456664488285384
+    ],
+    "ci_method": "Welch independent-winter CI",
+    "welch_t": 1.0777943929859028,
+    "welch_df": 32.55917783665509,
+    "welch_p": 0.28904630677772686,
+    "permutation_p": 0.1941,
+    "permutations": 9999,
+    "permutation_method": "Two-sided winter-label permutation, plus-one correction; exchangeable winters",
+    "seed": 20261114,
+    "winters": [
+      {
+        "year": 1950,
+        "mean_mm": -49.40321161597402,
+        "djf_oni_c": -1.32,
+        "el_nino": false
+      },
+      {
+        "year": 1951,
+        "mean_mm": 38.498332925917,
+        "djf_oni_c": -0.66,
+        "el_nino": false
+      },
+      {
+        "year": 1952,
+        "mean_mm": 19.542734610665157,
+        "djf_oni_c": 0.52,
+        "el_nino": true
+      },
+      {
+        "year": 1953,
+        "mean_mm": 30.015707723984743,
+        "djf_oni_c": 0.25,
+        "el_nino": false
+      },
+      {
+        "year": 1954,
+        "mean_mm": -11.082747734124238,
+        "djf_oni_c": 0.41,
+        "el_nino": false
+      },
+      {
+        "year": 1955,
+        "mean_mm": -10.609774620804655,
+        "djf_oni_c": -0.5,
+        "el_nino": false
+      },
+      {
+        "year": 1956,
+        "mean_mm": 26.00605563537207,
+        "djf_oni_c": -1.17,
+        "el_nino": false
+      },
+      {
+        "year": 1957,
+        "mean_mm": -0.9495426798797675,
+        "djf_oni_c": -0.27,
+        "el_nino": false
+      },
+      {
+        "year": 1958,
+        "mean_mm": 54.38057329058267,
+        "djf_oni_c": 1.69,
+        "el_nino": true
+      },
+      {
+        "year": 1959,
+        "mean_mm": -27.289310738954885,
+        "djf_oni_c": 0.6,
+        "el_nino": true
+      },
+      {
+        "year": 1960,
+        "mean_mm": 31.183662374364697,
+        "djf_oni_c": 0.02,
+        "el_nino": false
+      },
+      {
+        "year": 1961,
+        "mean_mm": 25.228064059112853,
+        "djf_oni_c": 0.0,
+        "el_nino": false
+      },
+      {
+        "year": 1962,
+        "mean_mm": 6.986751458146725,
+        "djf_oni_c": -0.16,
+        "el_nino": false
+      },
+      {
+        "year": 1963,
+        "mean_mm": -10.254561142819398,
+        "djf_oni_c": -0.33,
+        "el_nino": false
+      },
+      {
+        "year": 1964,
+        "mean_mm": -39.924445172356954,
+        "djf_oni_c": 0.95,
+        "el_nino": true
+      },
+      {
+        "year": 1965,
+        "mean_mm": 16.69138508381977,
+        "djf_oni_c": -0.51,
+        "el_nino": false
+      },
+      {
+        "year": 1966,
+        "mean_mm": -18.692784660003497,
+        "djf_oni_c": 1.24,
+        "el_nino": true
+      },
+      {
+        "year": 1967,
+        "mean_mm": 36.4944741676018,
+        "djf_oni_c": -0.46,
+        "el_nino": false
+      },
+      {
+        "year": 1968,
+        "mean_mm": -25.175409861935755,
+        "djf_oni_c": -0.62,
+        "el_nino": false
+      },
+      {
+        "year": 1969,
+        "mean_mm": -30.559579605759033,
+        "djf_oni_c": 0.98,
+        "el_nino": true
+      },
+      {
+        "year": 1970,
+        "mean_mm": 29.91339350756056,
+        "djf_oni_c": 0.46,
+        "el_nino": false
+      },
+      {
+        "year": 1971,
+        "mean_mm": 23.243509478023007,
+        "djf_oni_c": -1.29,
+        "el_nino": false
+      },
+      {
+        "year": 1972,
+        "mean_mm": 23.145054019914017,
+        "djf_oni_c": -0.57,
+        "el_nino": false
+      },
+      {
+        "year": 1973,
+        "mean_mm": 84.76088427609076,
+        "djf_oni_c": 1.55,
+        "el_nino": true
+      },
+      {
+        "year": 1974,
+        "mean_mm": -18.051856896303953,
+        "djf_oni_c": -1.87,
+        "el_nino": false
+      },
+      {
+        "year": 1975,
+        "mean_mm": -32.0074552115558,
+        "djf_oni_c": -0.56,
+        "el_nino": false
+      },
+      {
+        "year": 1976,
+        "mean_mm": 0.1798036160495075,
+        "djf_oni_c": -1.49,
+        "el_nino": false
+      },
+      {
+        "year": 1977,
+        "mean_mm": -140.20436612777377,
+        "djf_oni_c": 0.71,
+        "el_nino": true
+      },
+      {
+        "year": 1978,
+        "mean_mm": 62.840035556974385,
+        "djf_oni_c": 0.71,
+        "el_nino": true
+      },
+      {
+        "year": 1979,
+        "mean_mm": 3.455865813151121,
+        "djf_oni_c": 0.19,
+        "el_nino": false
+      },
+      {
+        "year": 1980,
+        "mean_mm": -41.49973250210072,
+        "djf_oni_c": 0.62,
+        "el_nino": true
+      },
+      {
+        "year": 1981,
+        "mean_mm": -106.883902245924,
+        "djf_oni_c": -0.27,
+        "el_nino": false
+      },
+      {
+        "year": 1982,
+        "mean_mm": -65.98235770403298,
+        "djf_oni_c": -0.05,
+        "el_nino": false
+      },
+      {
+        "year": 1983,
+        "mean_mm": 48.06204398071517,
+        "djf_oni_c": 2.14,
+        "el_nino": true
+      },
+      {
+        "year": 1984,
+        "mean_mm": 55.963588522606194,
+        "djf_oni_c": -0.63,
+        "el_nino": false
+      },
+      {
+        "year": 1985,
+        "mean_mm": -40.56343836407422,
+        "djf_oni_c": -1.01,
+        "el_nino": false
+      },
+      {
+        "year": 1986,
+        "mean_mm": 1.76667760638822,
+        "djf_oni_c": -0.4,
+        "el_nino": false
+      },
+      {
+        "year": 1987,
+        "mean_mm": 24.525365005422096,
+        "djf_oni_c": 1.18,
+        "el_nino": true
+      },
+      {
+        "year": 1988,
+        "mean_mm": -26.001661881258322,
+        "djf_oni_c": 0.63,
+        "el_nino": true
+      },
+      {
+        "year": 1989,
+        "mean_mm": -69.67154591079587,
+        "djf_oni_c": -1.64,
+        "el_nino": false
+      },
+      {
+        "year": 1990,
+        "mean_mm": -84.91285851176201,
+        "djf_oni_c": 0.18,
+        "el_nino": false
+      },
+      {
+        "year": 1991,
+        "mean_mm": -14.868456827013846,
+        "djf_oni_c": 0.35,
+        "el_nino": false
+      },
+      {
+        "year": 1992,
+        "mean_mm": -0.5383408565514084,
+        "djf_oni_c": 1.54,
+        "el_nino": true
+      },
+      {
+        "year": 1993,
+        "mean_mm": 23.648917971053898,
+        "djf_oni_c": 0.13,
+        "el_nino": false
+      },
+      {
+        "year": 1994,
+        "mean_mm": -39.592394629912235,
+        "djf_oni_c": 0.07,
+        "el_nino": false
+      },
+      {
+        "year": 1995,
+        "mean_mm": -51.40513580230694,
+        "djf_oni_c": 0.88,
+        "el_nino": true
+      },
+      {
+        "year": 1996,
+        "mean_mm": 17.78212302529837,
+        "djf_oni_c": -0.88,
+        "el_nino": false
+      },
+      {
+        "year": 1997,
+        "mean_mm": 77.54081042433225,
+        "djf_oni_c": -0.41,
+        "el_nino": false
+      },
+      {
+        "year": 1998,
+        "mean_mm": 83.01378353765183,
+        "djf_oni_c": 2.22,
+        "el_nino": true
+      },
+      {
+        "year": 1999,
+        "mean_mm": -13.08467192045716,
+        "djf_oni_c": -1.51,
+        "el_nino": false
+      },
+      {
+        "year": 2000,
+        "mean_mm": -45.18312737856615,
+        "djf_oni_c": -1.47,
+        "el_nino": false
+      },
+      {
+        "year": 2001,
+        "mean_mm": 20.718417163324876,
+        "djf_oni_c": -0.76,
+        "el_nino": false
+      },
+      {
+        "year": 2002,
+        "mean_mm": -63.95146686621269,
+        "djf_oni_c": -0.15,
+        "el_nino": false
+      },
+      {
+        "year": 2003,
+        "mean_mm": -32.62135089575025,
+        "djf_oni_c": 0.9,
+        "el_nino": true
+      },
+      {
+        "year": 2004,
+        "mean_mm": -47.86266349671637,
+        "djf_oni_c": 0.34,
+        "el_nino": false
+      },
+      {
+        "year": 2005,
+        "mean_mm": 54.61030961660321,
+        "djf_oni_c": 0.62,
+        "el_nino": true
+      },
+      {
+        "year": 2006,
+        "mean_mm": -8.059574412934344,
+        "djf_oni_c": -0.86,
+        "el_nino": false
+      },
+      {
+        "year": 2007,
+        "mean_mm": -54.158029871043325,
+        "djf_oni_c": 0.62,
+        "el_nino": true
+      },
+      {
+        "year": 2008,
+        "mean_mm": 1.8863718137048247,
+        "djf_oni_c": -1.76,
+        "el_nino": false
+      },
+      {
+        "year": 2009,
+        "mean_mm": -29.212083644404153,
+        "djf_oni_c": -0.89,
+        "el_nino": false
+      },
+      {
+        "year": 2010,
+        "mean_mm": 105.68946089748685,
+        "djf_oni_c": 1.47,
+        "el_nino": true
+      },
+      {
+        "year": 2011,
+        "mean_mm": 35.44814829652072,
+        "djf_oni_c": -1.29,
+        "el_nino": false
+      },
+      {
+        "year": 2012,
+        "mean_mm": 18.349692838411748,
+        "djf_oni_c": -0.71,
+        "el_nino": false
+      },
+      {
+        "year": 2013,
+        "mean_mm": 34.53695166601704,
+        "djf_oni_c": -0.24,
+        "el_nino": false
+      },
+      {
+        "year": 2014,
+        "mean_mm": -28.132932363520517,
+        "djf_oni_c": -0.24,
+        "el_nino": false
+      },
+      {
+        "year": 2015,
+        "mean_mm": -34.08853067877235,
+        "djf_oni_c": 0.73,
+        "el_nino": true
+      },
+      {
+        "year": 2016,
+        "mean_mm": 23.241585291690082,
+        "djf_oni_c": 2.5,
+        "el_nino": true
+      },
+      {
+        "year": 2017,
+        "mean_mm": -26.71401302356175,
+        "djf_oni_c": -0.08,
+        "el_nino": false
+      },
+      {
+        "year": 2018,
+        "mean_mm": -3.526754195956459,
+        "djf_oni_c": -0.71,
+        "el_nino": false
+      },
+      {
+        "year": 2019,
+        "mean_mm": 10.803361774505987,
+        "djf_oni_c": 0.99,
+        "el_nino": true
+      },
+      {
+        "year": 2020,
+        "mean_mm": 77.56204917353986,
+        "djf_oni_c": 0.71,
+        "el_nino": true
+      },
+      {
+        "year": 2021,
+        "mean_mm": 32.17787942971659,
+        "djf_oni_c": -0.99,
+        "el_nino": false
+      },
+      {
+        "year": 2022,
+        "mean_mm": 26.22228111446475,
+        "djf_oni_c": -0.76,
+        "el_nino": false
+      },
+      {
+        "year": 2023,
+        "mean_mm": 77.26668279921292,
+        "djf_oni_c": -0.55,
+        "el_nino": false
+      },
+      {
+        "year": 2024,
+        "mean_mm": 157.88251305538967,
+        "djf_oni_c": 1.84,
+        "el_nino": true
+      },
+      {
+        "year": 2025,
+        "mean_mm": -13.073085259862207,
+        "djf_oni_c": -0.46,
+        "el_nino": false
+      },
+      {
+        "year": 2026,
+        "mean_mm": 6.828459282028803,
+        "djf_oni_c": -0.39,
+        "el_nino": false
+      }
+    ]
+  }
+}

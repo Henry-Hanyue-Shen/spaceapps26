@@ -1,0 +1,46 @@
+{
+  "datum": "MSL",
+  "units": "mm",
+  "gauges": {
+    "8518750": {
+      "name": "The Battery",
+      "window": [
+        "1856-01-01",
+        "2026-10-01"
+      ],
+      "n": 1865,
+      "source": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter",
+      "missing_months": 185
+    },
+    "9410230": {
+      "name": "La Jolla",
+      "window": [
+        "1924-11-01",
+        "2026-09-01"
+      ],
+      "n": 1188,
+      "source": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter",
+      "missing_months": 35
+    },
+    "9414290": {
+      "name": "San Francisco",
+      "window": [
+        "1854-07-01",
+        "2026-10-01"
+      ],
+      "n": 2059,
+      "source": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter",
+      "missing_months": 9
+    }
+  },
+  "oni": {
+    "window": [
+      "1950-01-01",
+      "2026-09-01"
+    ],
+    "n": 921,
+    "source": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+    "units": "degree C",
+    "time_assignment": "central month; DJF is January of the stated year"
+  }
+}

@@ -1,0 +1,35 @@
+column_or_dataset,source,nasa_data
+Battery hourly water level and tide prediction (target),"NOAA CO-OPS station 8518750, products hourly_height and predictions, datum MSL, metres, GMT",no
+Globe map temperature field,"NASA GISTEMP v4 gridded (gistemp1200_GHCNv4_ERSSTv5), 2 x 2 degree, data.giss.nasa.gov",yes
+Sea_level_monthly sheet,"NOAA CO-OPS monthly mean sea level: The Battery 8518750, La Jolla 9410230, San Francisco 9414290",no
+slp_iceland_power,"NASA POWER (MERRA-2) SLP, 65.08N 22.73W, kPa",yes
+slp_azores_power,"NASA POWER (MERRA-2) SLP, 37.74N 25.68W, kPa",yes
+npi_power,NASA POWER (MERRA-2) SLP at 50N 165W (Aleutian low / North Pacific index proxy),yes
+polar_slp_power,"NASA POWER (MERRA-2) SLP at 85N (polar pressure, AO proxy)",yes
+wind_ne_power,"NASA POWER (MERRA-2) NY Bight 10 m wind from the NE, m/s",yes
+slp_nybight_power,"NASA POWER (MERRA-2) NY Bight SLP, kPa",yes
+storminess_power,NASA POWER (MERRA-2) NY Bight: SD of daily SLP within the month,yes
+nino34_giss,"NASA GISTEMP v4 gridded, box mean minus 60S-60N mean (nino34_giss)",yes
+natl_giss,"NASA GISTEMP v4 gridded, box mean minus 60S-60N mean (natl_giss)",yes
+subpolar_giss,"NASA GISTEMP v4 gridded, box mean minus 60S-60N mean (subpolar_giss)",yes
+nwatl_shelf_giss,"NASA GISTEMP v4 gridded, box mean minus 60S-60N mean (nwatl_shelf_giss)",yes
+trop_natl_giss,"NASA GISTEMP v4 gridded, box mean minus 60S-60N mean (trop_natl_giss)",yes
+oni,NOAA CPC Oceanic Nino Index,no
+nao_cpc,NOAA CPC NAO,no
+ao_cpc,NOAA CPC AO,no
+pna_cpc,NOAA CPC PNA,no
+qbo_cpc,NOAA CPC QBO 50 hPa zonal wind,no
+pdo_ncei,NOAA NCEI PDO (ERSST v5),no
+seaice_arctic,"NSIDC Sea Ice Index v4, Arctic extent (NASA DAAC at NSIDC)",no
+msl_bermuda,"NOAA CO-OPS 2695540 monthly mean sea level, mm",no
+msl_portland,"NOAA CO-OPS 8418150 monthly mean sea level, mm",no
+msl_boston,"NOAA CO-OPS 8443970 monthly mean sea level, mm",no
+msl_montauk,"NOAA CO-OPS 8510560 monthly mean sea level, mm",no
+msl_kings_point,"NOAA CO-OPS 8516945 monthly mean sea level, mm",no
+msl_sandy_hook,"NOAA CO-OPS 8531680 monthly mean sea level, mm",no
+msl_atlantic_city,"NOAA CO-OPS 8534720 monthly mean sea level, mm",no
+msl_sewells_point,"NOAA CO-OPS 8638610 monthly mean sea level, mm",no
+msl_charleston,"NOAA CO-OPS 8665530 monthly mean sea level, mm",no
+msl_key_west,"NOAA CO-OPS 8724580 monthly mean sea level, mm",no
+hudson_flow,"USGS 01358000 Hudson River at Green Island, monthly mean discharge",no
+nao_power,NASA POWER (MERRA-2) SLP: z(Azores) - z(Iceland),yes

@@ -1,0 +1,276 @@
+% Argument Tree (literature-grounded, v2) for the NASA Space Apps 2026 entry "Sea Level Detective"
+% Built from the argument-tree skill template. Compile with pdflatex (twice).
+\documentclass[10pt]{article}
+\usepackage{mathptmx}\usepackage[scaled=0.9]{helvet}\usepackage[T1]{fontenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[edges]{forest}
+\usepackage[most]{tcolorbox}
+\usepackage{booktabs,tabularx,enumitem,xcolor}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\setlist{nosep,leftmargin=1.2em}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\setlength{\parindent}{0pt}
+
+\newcommand{\evtag}[1]{\fbox{\scriptsize\sffamily\bfseries #1}}
+\setlength{\fboxsep}{1pt}\setlength{\fboxrule}{0.4pt}
+\newcommand{\EvT}{\evtag{T}}
+\newcommand{\EvL}{\evtag{L}}
+\newcommand{\EvN}{\evtag{N}}
+
+\tcbset{evbase/.style={enhanced,breakable,sharp corners,boxrule=0.4pt,colframe=black!70,colback=white,
+  fonttitle=\sffamily\bfseries\footnotesize,fontupper=\small,left=4pt,right=4pt,top=2pt,bottom=2pt,
+  boxsep=1pt,toptitle=1pt,bottomtitle=1pt,before skip=4pt,after skip=4pt}}
+\newtcolorbox{thbox}[1][THEORETICAL EVIDENCE]{evbase,colbacktitle=black!80,coltitle=white,title={#1}}
+\newtcolorbox{libox}[1][LITERATURE EVIDENCE]{evbase,colbacktitle=black!50,coltitle=white,title={#1}}
+\newtcolorbox{nubox}[1][NUMERICAL EVIDENCE]{evbase,colbacktitle=black!20,coltitle=black,title={#1}}
+\newtcolorbox{cabox}[1][CAVEATS AND BOUNDARIES]{evbase,colback=black!4,colbacktitle=black!4,coltitle=black,
+  borderline={0.4pt}{0pt}{black!70,dashed},boxrule=0pt,title={#1}}
+\newtcolorbox{claimbox}[1]{enhanced,sharp corners,boxrule=0pt,colback=white,colframe=white,
+  borderline north={1.2pt}{0pt}{black},borderline south={0.4pt}{0pt}{black},
+  colbacktitle=white,coltitle=black,title={#1},fonttitle=\sffamily\bfseries\large,
+  fontupper=\small\itshape,left=0pt,right=0pt,top=1pt,bottom=4pt,toptitle=4pt,bottomtitle=0pt,
+  before skip=10pt,after skip=4pt}
+
+\begin{document}
+\begin{center}
+{\sffamily\LARGE\bfseries Argument Tree: Sea Level Detective}\\[4pt]
+{\small NASA Space Apps 2026 \textperiodcentered{} challenge ``Be An Earth System Trend Detective!'' \textperiodcentered{}
+literature-grounded case \textperiodcentered{} status 2026-11-14}\\[2pt]
+{\footnotesize Evidence types:\enspace \EvT{} theory\quad \EvL{} published literature / agency documentation\quad \EvN{} numerical (this project)}
+\end{center}
+\vspace{-4pt}\noindent\rule{\linewidth}{0.8pt}
+
+\begin{tcolorbox}[enhanced,sharp corners,boxrule=0.6pt,colframe=black,colback=black!5,colbacktitle=black,coltitle=white,
+  title={ROOT THESIS},fonttitle=\sffamily\bfseries\footnotesize,fontupper=\small,left=5pt,right=5pt,toptitle=1pt,bottomtitle=1pt]
+Published work establishes that \textbf{reference-mission altimetry since 1993 (the missions behind NASA-SSH) measures global and
+local sea-level trends with published uncertainty}, that \textbf{short-record trends mix long-term rise with El Ni\~no and decadal swings
+of tens of centimetres that flip sign across the Pacific}, and that \textbf{El Ni\~no raises West Coast sea level by up to 20 cm and
+East Coast surge counts through winter storms}. A tool that removes the seasonal cycle and \textbf{regresses out a NASA ENSO index}
+before an autocorrelation-aware trend test therefore answers a documented need. Experiments E0--E8 add the project's own numbers.
+\end{tcolorbox}
+
+\vspace{2pt}
+\begin{center}
+\begin{forest}
+for tree={grow'=0, draw=black!70, line width=0.4pt, font=\small, inner sep=3pt, s sep=3pt, l sep=14pt,
+          edge={black!70, line width=0.4pt}, forked edges, anchor=west, child anchor=west, parent anchor=east, calign=center,
+          text width=9.6cm, align=left},
+where level=0{text width=2.0cm, align=left, fill=black, text=white, font=\small\sffamily\bfseries}{},
+where level=1{text width=3.9cm, align=left, fill=black!12, font=\small\sffamily\bfseries}{},
+[{Trend or\\ El Ni\~no?\\ A needed\\ tool}
+  [{C1. Altimetry\\ measures trends}
+    [{C1.1 Global rise about 3 mm/yr since 1993, accelerating \EvL}]
+    [{C1.2 Local trends: mean uncertainty 0.83 mm/yr \EvL}]
+    [{C1.3 NASA-SSH grid: 0.5\textdegree, weekly, 1992--present \EvL}]]
+  [{C2. El Ni\~no distorts\\ short-record trends}
+    [{C2.1 West--east seesaw pivoting at the dateline \EvL}]
+    [{C2.2 2015/16: western Pacific fell more than 30 cm \EvL}]
+    [{C2.3 Short Pacific trends partly natural variability \EvL}]
+    [{C2.4 2010--11 La Ni\~na lowered global sea level 5 mm \EvL}]]
+  [{C3. Detection needs\\ the right statistics}
+    [{C3.1 Years needed rise with noise and autocorrelation \EvL}]
+    [{C3.2 Mann--Kendall, Sen slope, Hamed--Rao fix \EvL}]
+    [{C3.3 ENSO index regression explains far more variance \EvL}]
+    [{C3.4 Autocorrelation-aware MK used on U.S. gauges \EvL}]
+    [{C3.5 Only AR(1)-adjusted OLS holds about 5\% false alarms \EvN}]]
+  [{C4. El Ni\~no is felt\\ on U.S. coasts}
+    [{C4.1 ENSO: up to 20 cm on the U.S. West Coast \EvL}]
+    [{C4.2 East Coast surge days rise in El Ni\~no winters \EvL}]
+    [{C4.3 2015/16: record waves, West Coast erosion \EvL}]
+    [{C4.4 Panama 2023: El Ni\~no + demand lowered Gatun \EvL}]
+    [{C4.5 La Jolla, S.F.: about 4 cm per \textdegree C of ONI \EvN}]
+    [{C4.6 Battery El Ni\~no winters +15 mm, not significant \EvN}]]
+  [{C5. Ocean waves\\ carry the signal}
+    [{C5.1 Low-frequency waves trapped at the equator \EvT\,\EvL}]
+    [{C5.2 Kelvin waves at theoretical speed in altimetry \EvL}]]
+]
+\end{forest}
+\end{center}
+
+\newpage
+% ===================================================================== C1
+\begin{claimbox}{C1. Satellite altimetry measures global and local sea-level trends}
+Reference-mission altimetry since 1993 resolves the global trend and its acceleration, and local trends with quantified uncertainty.
+\end{claimbox}
+\begin{libox}
+\textbf{C1.1} Nerem et al.\ [1]: global mean sea level has risen ``at a rate of $\sim$3 $\pm$ 0.4 mm/y since 1993'', accelerating at
+0.084 $\pm$ 0.025 mm/yr$^2$, after ``careful consideration of interannual and decadal variability''. Gu\'erou et al.\ [2] give the
+1993--2021 record a stability of $\pm$0.3 mm/yr.\\
+\textbf{C1.2} Prandi et al.\ [3]: over 1993--2019, ``the average local sea level trend uncertainty is 0.83 mm yr$^{-1}$'' (90\% confidence).\\
+\textbf{C1.3} PO.DAAC [4]: \texttt{NASA\_SSH\_REF\_SIMPLE\_GRID\_V1}, sea-surface-height anomaly on a 0.5\textdegree{} grid, one map
+every 7 days from 10 days of TOPEX/Poseidon, Jason and Sentinel-6 data, 1992--present.
+\end{libox}
+\begin{nubox}[PLANNED OWN EVIDENCE]
+E0: reproduce [1] (rate, acceleration) with NASA-SSH, after matching our global series to \texttt{NASA\_SSH\_GMSL\_INDICATOR}.
+E6: share of the ocean with a significant local trend once natural variability is in the noise, compared with [3].
+\end{nubox}
+\begin{cabox}
+The uncertainty of [3] covers measurement error only; natural variability is excluded from it (noted by a co-reviewer from the full
+text). That is exactly why C2 matters. [2] and [3] use the CNES/AVISO and Copernicus products, not the NASA-SSH grid. The reference
+missions are the same, but their uncertainties are not NASA-SSH's. Altimetry is smoothed over about 100 km and does not resolve harbors.
+\end{cabox}
+
+% ===================================================================== C2
+\begin{claimbox}{C2. El Ni\~no distorts sea-level trends fitted over short records}
+El Ni\~no moves sea level by tens of centimetres in opposite directions across the Pacific, enough to bias a short-record trend.
+\end{claimbox}
+\begin{libox}
+\textbf{C2.1} Alory and Delcroix [5], TOPEX/Poseidon 1993--1999: a ``dominant El Ni\~no-Southern Oscillation (ENSO) signal showed up in
+the equatorial band as a zonal seesaw pattern in sea level around a fulcrum at the dateline''.\\
+\textbf{C2.2} Widlansky et al.\ [6]: ``With El Ni\~no, such as the strong 2015/16 event, comes weaker trade winds and mean sea level drops
+exceeding 30 cm in the western Pacific''; La Ni\~na brings high stands of 10--20 cm.\\
+\textbf{C2.3} Zhang and Church [7]: over the altimeter era, ``the rapid rates of sea level rise in the western tropical Pacific found from a single
+variable linear regression analysis are partially due to basin-scale decadal climate variability''; the U.S. West Coast shows little
+rise for the same reason.\\
+\textbf{C2.4} Boening et al.\ [8]: ``Global mean sea level (GMSL) dropped by 5 mm between the beginning of 2010 and mid 2011'', tied to the
+El Ni\~no to La Ni\~na transition.
+\end{libox}
+\begin{nubox}[PLANNED OWN EVIDENCE]
+E2: ENSO regression map (expect a sign change near the dateline) and the W/E Pacific boxes in 1997/98, 2015/16 and 2023/24.
+E3: spread of 10-year trends, raw vs ENSO-removed. E5: the 2010--11 dip in NASA-SSH, with GRACE ocean mass for the mechanism.
+\end{nubox}
+\begin{cabox}
+[7] attributes part of the bias to decadal variability (the Pacific Decadal Oscillation), not to ENSO alone. The tool's toggle is
+therefore described as ``regress out the NASA ENSO index'', not ``remove natural variability''.
+\end{cabox}
+
+% ===================================================================== C3
+\begin{claimbox}{C3. Detecting a trend needs the right statistics}
+Trend detection depends on record length, noise and autocorrelation; standard non-parametric tests with an autocorrelation fix exist and are used on sea level.
+\end{claimbox}
+\begin{libox}
+\textbf{C3.1} Weatherhead et al.\ [10]: ``The number of years of data necessary to detect a trend is strongly dependent on, and increases
+with, the magnitude of variance \ldots{} and autocorrelation coefficient \ldots{} of the noise.''\\
+\textbf{C3.2} Mann--Kendall test [11]; Sen's slope estimator [12]; Hamed and Rao's modified Mann--Kendall test for autocorrelated data [13];
+the seasonal Kendall test, ``a nonparametric test for trend applicable to data sets with seasonality'' [9]. The challenge names the t-test,
+Mann--Kendall and confidence intervals [14]; Sen, Hamed--Rao and seasonal Kendall are our choices.\\
+\textbf{C3.3} Zhang and Church [7]: a single linear trend ``accounts for slightly more than 20\% of the observed variance, whereas a multiple
+variable linear regression including filtered indices of the El Nino-Southern Oscillation and the Pacific Decadal Oscillation accounts
+for almost 60\%''. This is the regression the tool's El Ni\~no toggle adapts.\\
+\textbf{C3.4} Joshi et al.\ [15]: Mann--Kendall with autocorrelation correction on 59 U.S. tide gauges; ``short-term persistence was found in
+57 stations''.
+\end{libox}
+\begin{nubox}[OWN EVIDENCE: E1, RUN 2026-11-14]
+Monte Carlo, 1{,}000 series per setting, seed 20261114. Monthly AR(1) noise with marginal SD 61.3 mm and $\varphi = 0.69$ (median of the
+deseasonalized, detrended tide-gauge residuals at the Battery, La Jolla and San Francisco). Rejection rate at a true trend of 0 (should be 5\%),
+two-sided $\alpha = 0.05$, binomial Wilson 95\% CI:\\[2pt]
+\begin{tabularx}{\linewidth}{@{}l Y Y Y Y Y@{}}\toprule
+Record & naive OLS & plain MK & Hamed--Rao MK & seasonal Kendall & AR(1)-adj.\ OLS\\\midrule
+10 yr & 40.5\% [37.5, 43.6] & 38.4\% [35.4, 41.5] & 18.4\% [16.1, 20.9] & 35.4\% [32.5, 38.4] & 7.0\% [5.6, 8.8]\\
+35 yr & 38.6\% [35.6, 41.7] & 38.7\% [35.7, 41.8] & 18.5\% [16.2, 21.0] & 38.4\% [35.4, 41.5] & 5.4\% [4.2, 7.0]\\\bottomrule
+\end{tabularx}\\[2pt]
+\textbf{C3.5} Only the AR(1)-adjusted OLS test keeps false alarms near 5\%; Hamed--Rao reduces but does not remove the excess at this
+autocorrelation. Detection time for AR(1)-adjusted OLS at 90\% power: 28.8 years at 3 mm/yr and 24.2 years at 4 mm/yr, against Weatherhead's
+formula [10] at 29.2 and 24.1 years. \textbf{Consequence for the tool:} significance uses AR(1)-adjusted OLS; Sen's slope is shown as the
+robust rate.
+\end{nubox}
+\begin{cabox}
+E1 uses gauge-like noise. Satellite box means are smoother, so the rates will differ there; E1 reruns with NASA box residuals once those
+are downloaded. Seasonal Kendall here is applied without its serial-correlation correction.
+[15] found that accounting for autocorrelation did not change significance at most stations; the correction matters more for short or
+strongly autocorrelated records. Mann, Sen and Hamed--Rao were checked by DOI metadata only; they are cited as method sources.
+\end{cabox}
+
+% ===================================================================== C4
+\begin{claimbox}{C4. El Ni\~no is felt on U.S. coasts and in Panama shipping}
+Through sea level on the U.S. West Coast, through winter storms on the East Coast, and through rainfall in Panama: three different mechanisms.
+\end{claimbox}
+\begin{libox}
+\textbf{C4.1} Hamlington et al.\ [16]: ``ENSO can contribute significantly on short time scales, with contributions of up to 20 cm along
+the west coast of the U.S.''; tide gauges also show ``the influence of ENSO on the U.S. east coast''.\\
+\textbf{C4.2} Sweet and Zervas [17], cool seasons 1960--2010 at Boston, Atlantic City, Norfolk and Charleston: high numbers of daily storm surges
+``have a positive correlation with the El Ni\~no phase'', attributed to ``El Ni\~no-related changes to atmospheric pressure'' and winds.
+For New York itself the link is \emph{not} established: Colle et al.\ [18] report too few years and events for a statistical correlation
+with ENSO (full text read by a co-reviewer; the abstract does not mention ENSO).\\
+\textbf{C4.3} Barnard et al.\ [19]: in 2015--16, ``winter wave energy equalled or exceeded measured historical maxima across the US West Coast,
+corresponding to anomalously large beach erosion''.\\
+\textbf{C4.4} World Weather Attribution [20]: low 2023 rainy-season rainfall ``contributed to extremely low water levels in Lake Gatun'', with
+``around 8\% less precipitation in an El Ni\~no year''. El Ni\~no-related rainfall deficits and water demand contributed; the study could not
+attribute the drying to human-caused climate change (report read by both co-reviewers; title and DOI checked by us).\\
+\textbf{Why local matters.} Hamlington et al.\ [23]: ``changes in regional sea level are most relevant for coastal communities around the world.''
+\end{libox}
+\begin{nubox}[OWN EVIDENCE: E4 TIDE GAUGES, RUN 2026-11-14 (NOAA CO-OPS MONTHLY MEANS, NOAA ONI)]
+Joint fit of trend, annual and semiannual harmonics, and ONI at lag 0, over 1950--2026 (95\% CI):\\[2pt]
+\begin{tabularx}{\linewidth}{@{}l Y Y Y Y@{}}\toprule
+Gauge & ONI amplitude (mm/\textdegree C) & $R^2$ without / with ONI & peak anomaly 1997--98 & peak anomaly 2015--16\\\midrule
+La Jolla 9410230 & 37.8 [31.9, 43.8] & 0.68 / 0.81 & 207 mm (Nov 1997) & 165 mm (Oct 2015)\\
+San Francisco 9414290 & 39.7 [32.0, 47.5] & 0.46 / 0.61 & 298 mm (Feb 1998) & 150 mm (Oct 2015)\\
+The Battery 8518750 & 8.9 [1.3, 16.5] & 0.704 / 0.708 & 244 mm (Feb 1998) & 52 mm (Sep 2016)\\\bottomrule
+\end{tabularx}\\[2pt]
+\textbf{C4.5} On the California coast, sea level rises about 4 cm per \textdegree C of ONI, and the 1997--98 and 2015--16 peaks are 15--30 cm.
+That matches Hamlington's ``up to 20 cm'' [16] in size. \textbf{C4.6} At the Battery, El Ni\~no winters (DJF ONI $\geq$ 0.5) average
++15.0 mm [$-$13.4, 43.5] above other winters (Oct--Apr means, 25 vs 52 winters, 1949--2026). Welch $p = 0.29$, permutation $p = 0.19$:
+\textbf{not significant}, consistent with [18].
+Still planned: NASA boxes vs these gauges (E4 satellite part); E8, GPM rainfall over Panama in 2023.
+\end{nubox}
+\begin{cabox}
+New York and Panama are atmospheric links: the equatorial ocean wave does not reach them. [17] has no New York gauge, [18] finds no
+established ENSO link there, and our Battery test is not significant either. So the site says ``U.S. East Coast'' for surges and shows
+New York as a place where the El Ni\~no signal is weak. Gauge peaks are the largest monthly anomalies in each window; storms contribute
+(Feb 1998 at the Battery and San Francisco). Gauges record relative sea level, including land motion. [20] is a
+rapid-attribution report, not a journal article; Panama is a freshwater example, not sea-level evidence.
+\end{cabox}
+
+% ===================================================================== C5
+\begin{claimbox}{C5. Ocean waves carry the El Ni\~no signal across the Pacific (explainer)}
+Equatorially trapped Kelvin and Rossby waves move sea-level anomalies across the basin at speeds predicted by theory.
+\end{claimbox}
+\begin{thbox}
+\textbf{C5.1} Matsuno [21]: on the equatorial $\beta$-plane, low-frequency waves are trapped near the equator; the Kelvin wave has zero
+meridional velocity, a Gaussian sea-level envelope of width $L=\sqrt{c/\beta}$, and travels east at the gravity-wave speed $c$
+(written derivation in the professor's note, Sec.~4).
+\end{thbox}
+\begin{libox}
+\textbf{C5.2} Boulanger and Menkes [22], TOPEX/Poseidon in the 1992--93 El Ni\~no: ``The Kelvin and first three Rossby waves of the first baroclinic mode
+are propagating at theoretical wave speeds in all data sets.''
+\end{libox}
+\begin{nubox}
+The professor's 2015--16 run (repository \texttt{zyskin/NASA\_Ocean\_PINN}, not rerun by us) estimates eastward propagation at 1.50--1.62 m/s from
+NASA-SSH. It illustrates C5.2 on the event the explainer shows; it is not the basis of the claim. Planned E7: the same diagnostics for
+1997--98 and 2023--24.
+\end{nubox}
+\begin{cabox}
+The repository's single-speed PINN value (0.834 m/s) is a blended fit and is left out.
+\end{cabox}
+
+% ===================================================================== global
+\begin{cabox}[GLOBAL LIMITATIONS AND SOURCES]
+Every claim rests on published literature or agency documentation. Own numbers so far: E1 (synthetic) and the tide-gauge part of E4
+(NOAA data, no login), run 2026-11-14 with \texttt{pipeline/run\_all.py --no-nasa}. The NASA-SSH experiments (E0, E2, E3, the E4 satellite
+part) wait for an Earthdata login. Reading status: abstract read by us: [1]--[3], [5]--[10], [15]--[17], [19], [22], [23]; every quote in
+C1--C5 was also checked word for word against the abstracts by a co-reviewer (Kimi). Full text read by co-reviewers only: [18], [20].
+Metadata only: [11]--[13]. Agency pages read: [4], [14]. Matsuno [21] was checked by metadata and the professor's derivation. Cazenave
+et al.\ 2014 was dropped: neither we nor the co-reviewers could read it. Citations were verified on 2026-11-14 against Crossref/DataCite.
+\end{cabox}
+
+\section*{References (verified 2026-11-14)}
+{\small\sloppy
+\begin{enumerate}[label={[\arabic*]},leftmargin=2.2em]
+\item R.~S. Nerem et al. Climate-change--driven accelerated sea-level rise detected in the altimeter era. \emph{PNAS} 115:2022--2025, 2018. doi:10.1073/pnas.1717312115.
+\item A.~Gu\'erou et al. Current observed global mean sea level rise and acceleration estimated from satellite altimetry and the associated measurement uncertainty. \emph{Ocean Sci.} 19:431--451, 2023. doi:10.5194/os-19-431-2023.
+\item P.~Prandi, B.~Meyssignac, M.~Ablain, G.~Spada, A.~Ribes, J.~Benveniste. Local sea level trends, accelerations and uncertainties over 1993--2019. \emph{Sci. Data} 8:1, 2021. doi:10.1038/s41597-020-00786-7.
+\item NASA/JPL PO.DAAC. NASA-SSH Simple Gridded Sea Surface Height from Standardized Reference Missions Only, Version 1, 2024. doi:10.5067/NSREF-SG0V1.
+\item G.~Alory, T.~Delcroix. Interannual sea level changes and associated mass transports in the tropical Pacific from TOPEX/Poseidon data and linear model results (1964--1999). \emph{J. Geophys. Res.} 107(C10), 2002. doi:10.1029/2001JC001067.
+\item M.~J. Widlansky et al. Multimodel ensemble sea level forecasts for tropical Pacific islands. \emph{J. Appl. Meteor. Climatol.} 56:849--862, 2017. doi:10.1175/JAMC-D-16-0284.1.
+\item X.~Zhang, J.~A. Church. Sea level trends, interannual and decadal variability in the Pacific Ocean. \emph{Geophys. Res. Lett.} 39:L21701, 2012. doi:10.1029/2012GL053240.
+\item C.~Boening, J.~K. Willis, F.~W. Landerer, R.~S. Nerem, J.~Fasullo. The 2011 La Ni\~na: so strong, the oceans fell. \emph{Geophys. Res. Lett.} 39, 2012. doi:10.1029/2012GL053055.
+\item R.~M. Hirsch, J.~R. Slack, R.~A. Smith. Techniques of trend analysis for monthly water quality data. \emph{Water Resour. Res.} 18:107--121, 1982. doi:10.1029/WR018i001p00107.
+\item E.~C. Weatherhead et al. Factors affecting the detection of trends: statistical considerations and applications to environmental data. \emph{J. Geophys. Res.} 103:17149--17161, 1998. doi:10.1029/98JD00995.
+\item H.~B. Mann. Nonparametric tests against trend. \emph{Econometrica} 13:245--259, 1945. doi:10.2307/1907187.
+\item P.~K. Sen. Estimates of the regression coefficient based on Kendall's tau. \emph{J. Amer. Statist. Assoc.} 63:1379--1389, 1968. doi:10.1080/01621459.1968.10480934.
+\item K.~H. Hamed, A.~R. Rao. A modified Mann--Kendall trend test for autocorrelated data. \emph{J. Hydrology} 204:182--196, 1998. doi:10.1016/S0022-1694(97)00125-X.
+\item NASA Space Apps Challenge 2026. Be An Earth System Trend Detective! \url{https://www.spaceappschallenge.org/2026/challenges/earth-system-trend-detective/}.
+\item N.~Joshi, A.~Kalra, B.~Thakur, K.~W. Lamb, S.~Bhandari. Analyzing the effects of short-term persistence and shift in sea level records along the US coast. \emph{Hydrology} 8:17, 2021. doi:10.3390/hydrology8010017.
+\item B.~D. Hamlington et al. The effect of the El Ni\~no-Southern Oscillation on U.S. regional and coastal sea level. \emph{J. Geophys. Res. Oceans} 120:3970--3986, 2015. doi:10.1002/2014JC010602.
+\item W.~Sweet, C.~Zervas. Cool-season sea level anomalies and storm surges along the U.S. East Coast: climatology and comparison with the 2009/10 El Ni\~no. \emph{Mon. Wea. Rev.} 139:2290--2299, 2011. doi:10.1175/MWR-D-10-05043.1.
+\item B.~A. Colle, K.~Rojowsky, F.~Buonaito. New York City storm surges: climatology and an analysis of the wind and cyclone evolution. \emph{J. Appl. Meteor. Climatol.} 49:85--100, 2010. doi:10.1175/2009JAMC2189.1.
+\item P.~L. Barnard et al. Extreme oceanographic forcing and coastal response due to the 2015--2016 El Ni\~no. \emph{Nature Commun.} 8:14365, 2017. doi:10.1038/ncomms14365.
+\item World Weather Attribution. Low water levels in Panama Canal due to increasing demand exacerbated by El Ni\~no event. Report, 1 May 2024. doi:10.25561/111007.
+\item T.~Matsuno. Quasi-geostrophic motions in the equatorial area. \emph{J. Meteor. Soc. Japan} 44:25--43, 1966. doi:10.2151/jmsj1965.44.1\_25.
+\item J.-P. Boulanger, C.~Menkes. Propagation and reflection of long equatorial waves in the Pacific Ocean during the 1992--1993 El Ni\~no. \emph{J. Geophys. Res.} 100(C12):25041--25059, 1995. doi:10.1029/95JC02956.
+\item B.~D. Hamlington et al. Understanding of contemporary regional sea-level change and the implications for the future. \emph{Rev. Geophys.} 58, 2020. doi:10.1029/2019RG000672.
+\end{enumerate}}
+\end{document}

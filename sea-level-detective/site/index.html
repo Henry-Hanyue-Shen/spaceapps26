@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sea Level Detective · Poseidon SAR</title>
+  <meta name="description" content="Is sea level really rising where you live, or is it El Niño? A trend detective built on NASA satellite altimetry.">
+  <link rel="stylesheet" href="style.css?v=20261115h">
+  <link rel="stylesheet" href="manuscript.css?v=20261115i">
+  <script src="vendor/plotly.min.js" defer></script>
+  <script src="vendor/globe.gl.min.js" defer></script>
+  <script type="module" src="app.js?v=20261115h"></script>
+  <script type="module" src="manuscript.js?v=20261115h"></script>
+  <noscript><style>.landing, .landing-roller { display: none !important; }</style></noscript>
+</head>
+<body>
+<!-- Landing: a closed scroll with the question; "Find out" unrolls the page. Its own tiny script (not the app modules),
+     so it can always open; without JavaScript it is never shown (noscript style in the head). -->
+<div class="landing" id="landing" role="dialog" aria-modal="true" aria-labelledby="landing-title">
+  <div class="landing-in">
+    <svg class="l-sketch" viewBox="0 0 260 170" aria-hidden="true">
+      <path pathLength="1" style="--d:.1s" d="M60 85a70 70 0 1 0 140 0a70 70 0 1 0-140 0"/>
+      <path pathLength="1" style="--d:.5s" class="faint" d="M130 15c-34 22-34 118 0 140M130 15c34 22 34 118 0 140M62 72c40 10 96 10 136 0M62 100c40-10 96-10 136 0"/>
+      <path pathLength="1" style="--d:.9s" class="faint" d="M74 113q12-10 26-2t26-3"/>
+      <path pathLength="1" style="--d:1.2s" class="red" d="M92 112C104 70 140 52 166 58"/>
+      <circle cx="92" cy="112" r="3.2" class="dot red"/><circle cx="166" cy="58" r="3.2" class="dot"/>
+      <path pathLength="1" style="--d:1.6s" class="faint" d="M8 150q14-8 28 0t28 0t28 0M196 150q14-8 28 0t28 0"/>
+    </svg>
+    <p class="l-eyebrow">NASA Space Apps 2026 · Team Poseidon SAR</p>
+    <h1 id="landing-title">Does the ocean know<br>before the sea rises in New York Harbor?</h1>
+    <p class="l-sub">With 29 NASA and NOAA clues, 45 winters, two coasts.</p>
+    <button type="button" id="landing-go">Find out</button>
+  </div>
+</div>
+<div class="landing-roller" id="landing-roller" aria-hidden="true"></div>
+<script>
+(function () {
+  var root = document.documentElement, L = document.getElementById("landing"), R = document.getElementById("landing-roller"),
+      b = document.getElementById("landing-go"), calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  root.classList.add("landing-on");
+  function go() {
+    if (L.classList.contains("rolling")) return;
+    window.scrollTo(0, 0);
+    L.classList.add("rolling"); R.classList.add("rolling");
+    setTimeout(function () { L.remove(); R.remove(); root.classList.remove("landing-on"); }, calm ? 250 : 1500);
+  }
+  b.addEventListener("click", go);
+  setTimeout(function () { try { b.focus({ preventScroll: true }); } catch (e) {} }, 400);
+})();
+</script>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">NASA Space Apps 2026 · Be An Earth System Trend Detective!</p>
+    <h1>Sea Level Detective</h1>
+    <p class="team">by Team <b>Poseidon SAR</b> · Maxim Zyskin, Hanyue Shen and Ningzi Chen</p>
+    <p class="team"><a href="slides.html">See the slides</a> · <a href="video30.html">▶ 30-second video</a> · <a href="video.html">▶ 1-minute video</a></p>
+    <p class="lede">29 clues from around the Earth, one that works: in June, the tropical Pacific tells how many storm-surge days
+      New York will get next winter.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="world" aria-labelledby="world-title">
+    <h2 id="world-title">Where on Earth is New York Harbor's winter written?</h2>
+    <div class="globe-card">
+      <div class="stage-head"><b>Of the Waters of New York</b><span id="hud-mode">Folio I · where the clue lies</span><span class="coast-switch" id="coast-switch" role="group" aria-label="Choose the coast"></span></div>
+      <div class="globe-stage drawer-open nota-open" id="globe-stage">
+        <div id="globe" role="img" aria-label="Rotating globe showing where on Earth data are linked to storm-surge days in New York Harbor"></div>
+        <div class="hud" aria-hidden="true">
+          <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+          
+          <div class="hud-bl" id="hud-cursor">move the pen over the Earth</div>
+        </div>
+
+        <!-- what the globe is showing right now, and the temperature / altimetry switch -->
+        <div class="globe-key" id="globe-key" aria-live="polite">
+          <div class="gk-switch" id="gk-switch" role="group" aria-label="Show sea height or temperature">
+            <button type="button" data-src="ssh">Global · altimetry</button><button type="button" data-src="sst">Global · temperature</button><button type="button" data-src="local">Local · tide gauges</button>
+          </div>
+          <div class="gk-text" id="gk-text"></div>
+        </div>
+
+        <!-- the three ways in: a rail of folio marks; each opens its own sidebar -->
+        <nav class="rail" aria-label="Ways to explore the globe">
+          <button type="button" class="rail-btn" id="tab-signal" aria-pressed="true"><span class="rail-num">I</span><span class="rail-txt">Find the clue</span></button>
+          <button type="button" class="rail-btn" id="tab-winter" aria-pressed="false"><span class="rail-num">II</span><span class="rail-txt">Test a winter</span></button>
+        </nav>
+
+        <aside class="drawer" id="drawer" aria-label="Controls">
+          <header class="drawer-head"><span id="drawer-title">Find the clue</span>
+            <button type="button" class="pop-close" id="drawer-close" aria-label="Close this panel">×</button></header>
+          <div class="drawer-body">
+
+      <div class="globe-controls" id="panel-signal">
+        <button id="globe-best" type="button" class="primary">★ Show me the best clue</button>
+        <button id="globe-next" type="button">Next clue ›</button>
+        <button id="globe-play" type="button" aria-pressed="false">▶ Play the months</button>
+        <label class="globe-month">Read in
+          <input type="range" id="globe-month" min="1" max="12" step="1" value="6" aria-describedby="globe-month-label">
+        </label>
+        <strong id="globe-month-label"></strong>
+        <div class="pic-row">
+          <span class="presets" id="pic-moments"></span>
+        </div>
+        <div class="nasa-legend" id="pic-legend" hidden></div>
+        <div class="globe-legend" id="legend-signal">
+          <span><i class="chip" style="background:#8b3a2b"></i><span id="lg-hi">warmer here → more storm-surge days in New York</span></span>
+          <span><i class="chip" style="background:#3a4e68"></i><span id="lg-lo">cooler here → more storm-surge days</span></span>
+          <span><i class="chip line" style="background:#a5462f"></i>proven clue, months ahead</span>
+          <span><i class="chip line" style="background:#3b2614"></i>clue for the same month</span>
+          <span><i class="chip line" style="background:#8a7a63"></i>tested, no clue</span>
+        </div>
+      </div>
+
+      <!-- the former "See it from space" mode: no longer reachable from the rail; kept so its controls still initialise -->
+      <div class="globe-controls" id="panel-nasa" hidden>
+        <div class="presets" id="nasa-presets" aria-label="Jump to a moment"></div>
+        <div class="layer-buttons" id="nasa-layers" role="group" aria-label="What the satellite shows">
+          <button type="button" data-layer="sst">Sea temperature</button><button type="button" data-layer="ssh">Sea height</button><button type="button" data-layer="clouds">Clouds</button>
+        </div>
+        <button id="nasa-play" type="button" aria-pressed="false">▶ Play</button>
+        <label class="globe-month">Date
+          <input type="range" id="nasa-date" min="0" max="100" step="1" value="0" aria-describedby="nasa-date-label">
+        </label>
+        <strong id="nasa-date-label"></strong>
+        <div class="nasa-legend" id="nasa-legend"></div>
+      </div>
+
+      <div class="globe-controls" id="panel-winter" hidden>
+        <button id="winter-prev" type="button" aria-label="Previous winter">◀</button>
+        <label class="globe-month winter-range">Winter
+          <input type="range" id="winter-year" min="0" max="10" step="1" value="0" aria-describedby="winter-label">
+        </label>
+        <button id="winter-next" type="button" aria-label="Next winter">▶</button>
+        <button id="winter-play" type="button" aria-pressed="false">▶ Play</button>
+        <strong id="winter-label"></strong>
+        <div id="wl-slot" class="wl-slot"></div>
+        <span class="winter-note" id="winter-note"></span>
+      </div>
+
+          </div>
+        </aside>
+
+        <div class="nota-wrap" id="nota-wrap">
+          <button type="button" class="pop-close" id="nota-close" aria-label="Close the note">×</button>
+          <aside id="globe-info" class="globe-info" aria-live="polite"></aside>
+        </div>
+        <button type="button" class="nota-reopen" id="nota-reopen" aria-label="Show the note">§ Nota</button>
+      </div>
+
+      <!-- Test a winter: every winter at once, sliding up under the globe -->
+      <div class="winter-sheet" id="winter-sheet" hidden>
+        <div class="winter-timeline" id="winter-timeline"></div>
+      </div>
+      <div class="globe-status" id="nasa-status" aria-live="polite"></div>
+    </div>
+    <p class="caption" id="globe-caption"></p>
+
+    <details class="table-view">
+      <summary>See all 29 clues we tested</summary>
+      <div id="world-table"></div>
+    </details>
+  </section>
+
+  <!-- The evidence, laid out as a board of panels that sit side by side on wide screens:
+       row 1 cause and effect (how early the Pacific knows / what New York gets), row 2 the sea-level detective and its test,
+       row 3 the ocean mechanism and the data. -->
+  <section class="board" aria-label="The evidence">
+    <article class="panel span-6" id="lead-panel">
+      <h2 class="panel-h">How early does the Pacific know?</h2>
+      <figure class="chart-card">
+        <div class="chart-ctrl">
+          <label>Read El Niño in <input type="range" id="lead-month" min="1" max="12" step="1" value="6"></label>
+          <b id="lead-month-l">June</b>
+        </div>
+        <div class="chart-readout" id="lead-readout" aria-live="polite"></div>
+        <div id="lead-curve" class="chart short" role="img" aria-label="How early El Niño predicts the surge season, by month"></div>
+        <figcaption class="caption" id="lead-caption"></figcaption>
+      </figure>
+      <div class="tiles tiles-2" id="lead-tiles" style="margin-top:10px"></div>
+    </article>
+
+    <article class="panel span-6" id="harbor" aria-labelledby="harbor-title">
+      <h2 class="panel-h" id="harbor-title">…and New York gets more storm surges</h2>
+      <p class="panel-lede">Storm-surge day: water 30 cm above normal at the Battery, tide removed
+        (<a href="https://doi.org/10.1175/MWR-D-10-05043.1" target="_blank" rel="noopener">Sweet &amp; Zervas 2011</a>).</p>
+      <div class="tiles tiles-2" id="ntr-tiles"></div>
+      <figure class="chart-card">
+        <div class="chart-ctrl">
+          <label>Strong El Niño = August at least <input type="range" id="ntr-thr" min="0.5" max="2" step="0.1" value="1.2"></label>
+          <b id="ntr-thr-l">1.2 steps</b>
+        </div>
+        <div class="chart-readout" id="ntr-readout" aria-live="polite"></div>
+        <div id="ntrchart" class="chart short" role="img" aria-label="Surge days per cool season at the Battery, strong El Niño winters highlighted"></div>
+        <figcaption id="ntr-caption" class="caption"></figcaption>
+      </figure>
+      <details class="table-view"><summary>How we tested it</summary><p class="note" id="ntr-note"></p></details>
+    </article>
+
+  <article class="panel span-12" id="physics-panel" aria-labelledby="physics-title">
+    <h2 class="panel-h" id="physics-title">The physics: a 14-day Pacific forecast</h2>
+    <p class="panel-lede">Equatorial waves carry El Niño’s signal; a shallow-water model on NASA sea height and OSCAR currents forecasts the next two weeks. Team analysis: Maxim Zyskin.</p>
+    <div class="tiles phys-tiles">
+      <div class="tile"><div class="tile-label">Wave speeds, m/s</div><div class="tile-value">+1.50–1.62 · −0.68–0.78</div><div class="tile-sub">Kelvin east (2015–16) · Rossby west (2026)</div></div>
+      <div class="tile"><div class="tile-label">14-day sea-height error</div><div class="tile-value">−12.3%</div><div class="tile-sub">vs persistence (95% CI 10.3–14.3%)</div></div>
+      <div class="tile"><div class="tile-label">Forecasts that beat persistence</div><div class="tile-value">168 / 182</div><div class="tile-sub">92%, rolling 2023–2026</div></div>
+      <div class="tile"><div class="tile-label">14-day surface currents</div><div class="tile-value">+9.4%</div><div class="tile-sub">skill vs persistence</div></div>
+    </div>
+    <details class="phys-more">
+      <summary>Open the physics: plots and method</summary>
+    <div class="phys-grid">
+      <figure><img src="img/zy_rossby_hovmoller.png?v=2" alt="Hovmöller diagram of the symmetric off-equatorial sea-height residual, 3° to 8° north and south, January to November 2026: bands slope westward over time at the first-Rossby speed." loading="lazy">
+        <figcaption>Westward-sloping sea-height bands follow the first-Rossby speed (2026).</figcaption></figure>
+      <figure><img src="img/zy_komega.png?v=2" alt="Wavenumber–frequency power spectrum of the same residual: power concentrated near the n = 1 equatorial Rossby dispersion curve." loading="lazy">
+        <figcaption>Wavenumber–frequency power sits on the n = 1 Rossby branch.</figcaption></figure>
+      <figure><img src="img/zy_ssh_oscar.png?v=2" alt="Map of NASA sea-surface height anomaly over the tropical Pacific with OSCAR total surface-current arrows, late October 2026: high sea along the equator." loading="lazy">
+        <figcaption>NASA sea height with OSCAR surface currents, the model’s starting state.</figcaption></figure>
+    </div>
+    <p class="note">Data: NASA-SSH sea height (0.5° weekly) and NASA SSH V1.1 with OSCAR V2 currents, 201 weekly states 2023–2026, 170°W–100°W, 10°S–10°N.
+      The model forecasts only the dynamical change on top of today’s ocean; coefficients are fit on earlier windows only, with no future wind forcing.</p>
+    </details>
+  </article>
+
+  <article class="panel span-12" id="tells-panel" aria-labelledby="tells-title">
+    <h2 class="panel-h" id="tells-title">What it tells us</h2>
+    <div class="plates">
+      <figure>
+        <img src="img/plate_ny.svg?v=2" alt="Pen-and-ink plate: New York Harbor at the Battery, lower-Manhattan towers with One World Trade Center, the Empire State Building in Midtown behind, the Statue of Liberty in the harbor, the tide gauge and its ruler, and a red-chalk storm-surge band on the quay wall." loading="lazy">
+        <figcaption><b>This winter.</b> About 21 storm-surge days expected in New York for 2026–27 (likely 14–32): twice a normal winter.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/plate_prepare.svg?v=2" alt="Pen-and-ink plate: flood-barrier panels holding back high water, pumps with hoses over the barrier, sandbags and a crew, and a calendar leaf: warned in June, ready by October." loading="lazy">
+        <figcaption><b>Time to prepare.</b> A June warning gives the city, the port and transit a whole season to stage barriers, pumps and crews.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/plate_la.svg?v=2" alt="Pen-and-ink plate: the Port of Los Angeles under the Vincent Thomas Bridge, the downtown skyline behind, gantry cranes over a container ship, container stacks, palms, and a red-chalk high-water line on the wharf." loading="lazy">
+        <figcaption><b>Open to every coast.</b> Free NASA and NOAA data. In Los Angeles each step of El Niño brings ×2.3 high-water days; in New York ×1.4.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <article class="panel span-8" id="explorer" aria-labelledby="explorer-title">
+    <h2 class="panel-h" id="explorer-title">Is the sea rising where you live?</h2>
+    <p class="panel-lede">Pick a place and years; the detective says whether the rise stands out.</p>
+    <div class="controls" role="group" aria-label="Choose what to investigate">
+      <label>Place
+        <select id="region"></select>
+      </label>
+      <label>From
+        <select id="start"></select>
+      </label>
+      <label>To
+        <select id="end"></select>
+      </label>
+      <label class="toggle">
+        <input type="checkbox" id="enso">
+        <span>Remove El Niño</span>
+      </label>
+      <label id="index-choice-wrap" hidden>Index
+        <select id="index-choice"></select>
+      </label>
+    </div>
+
+    <div class="tiles" aria-live="polite">
+      <div class="tile">
+        <div class="tile-label">Change per year</div>
+        <div class="tile-value" id="t-trend">–</div>
+        <div class="tile-sub" id="t-ci"></div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Verdict</div>
+        <div class="tile-value verdict" id="t-verdict">–</div>
+        <div class="tile-sub" id="t-p"></div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">El Niño's push</div>
+        <div class="tile-value" id="t-enso">–</div>
+        <div class="tile-sub" id="t-enso-sub">Tick “Remove El Niño” to measure it</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Years of records needed</div>
+        <div class="tile-value" id="t-years">–</div>
+        <div class="tile-sub" id="t-years-sub"></div>
+      </div>
+    </div>
+
+    <figure class="chart-card">
+      <div class="chart-ctrl" id="span-ctrl">
+        <span>Quick spans:</span>
+        <button type="button" data-span="10">last 10 years</button><button type="button" data-span="20">last 20</button>
+        <button type="button" data-span="30">last 30</button><button type="button" data-span="all">all years</button>
+        <em class="tap-hint">or drag across the chart</em>
+      </div>
+      <div id="chart" class="chart" role="img" aria-label="Monthly sea level with fitted trend"></div>
+      <figcaption id="chart-caption" class="caption"></figcaption>
+    </figure>
+    <details class="table-view">
+      <summary>See the monthly numbers</summary>
+      <div id="table"></div>
+    </details>
+  </article>
+
+  <article class="panel span-4" aria-labelledby="sig-title">
+    <h2 class="panel-h" id="sig-title">How it avoids false alarms</h2>
+    <p class="panel-lede">Sea level remembers last month, so common tests cry “trend!” too often.</p>
+    <figure class="chart-card">
+      <div class="chart-ctrl">
+        <label>Record length <input type="range" id="e1-years" min="0" max="5" step="1" value="0"></label> <b id="e1-years-l">10 years</b>
+        <label>Real rise hidden in it <input type="range" id="e1-trend" min="0" max="4" step="1" value="0"></label> <b id="e1-trend-l">none</b>
+      </div>
+      <div id="e1chart" class="chart short" role="img" aria-label="False alarm rate by test"></div>
+      <figcaption id="e1-caption" class="caption"></figcaption>
+    </figure>
+  </article>
+
+  <article class="panel span-5" id="pacific-panel" aria-labelledby="pacific-title">
+    <h2 class="panel-h" id="pacific-title">How El Niño moves the ocean</h2>
+    <figure class="img-card">
+      <img class="plain" src="img/hovmoller_equator.png?v=2" alt="Sea height along the equator (2°S–2°N, 170°W–100°W) against the global mean, January 2015 to July 2016: rising from spring 2015, high (red chalk) across the whole band from mid-2015, strongest from September to December 2015, then below normal (blue ink) by spring 2016." loading="lazy">
+      <figcaption class="caption">Sea height along the equator, 2015–16, against the global mean (NASA MEaSUREs altimetry, monthly). After M. Zyskin’s analysis.</figcaption>
+    </figure>
+    <p class="panel-lede" id="pacific-lede">Trade winds weaken, warm water surges east: in 2015–16 the equatorial Pacific rose about 20 cm.
+      In New York it arrives as more winter storm surges.</p>
+  </article>
+
+  <article class="panel span-7" aria-labelledby="data-title">
+    <h2 class="panel-h" id="data-title">Data</h2>
+    <ul id="sources" class="plain sources-compact">
+      <li><b>NASA</b>: <a href="https://podaac.jpl.nasa.gov/dataset/SEA_SURFACE_HEIGHT_ALT_GRIDS_L4_2SATS_5DAY_6THDEG_V_JPL1812" target="_blank" rel="noopener">MEaSUREs altimetry</a> ·
+        <a href="https://doi.org/10.5067/NSREF-SG0V1" target="_blank" rel="noopener">NASA-SSH</a> ·
+        <a href="https://data.giss.nasa.gov/gistemp/" target="_blank" rel="noopener">GISTEMP v4</a> ·
+        <a href="https://power.larc.nasa.gov/" target="_blank" rel="noopener">POWER</a> ·
+        <a href="https://podaac.jpl.nasa.gov/dataset/MUR25-JPL-L4-GLOB-v04.2" target="_blank" rel="noopener">GHRSST MUR</a> ·
+        <a href="https://worldview.earthdata.nasa.gov/?l=VIIRS_SNPP_CorrectedReflectance_TrueColor" target="_blank" rel="noopener">VIIRS</a>, pictures via
+        <a href="https://nasa-gibs.github.io/gibs-api-docs/" target="_blank" rel="noopener">GIBS</a></li>
+      <li><b>NOAA</b>: <a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8518750" target="_blank" rel="noopener">Battery tide gauge</a> ·
+        <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php" target="_blank" rel="noopener">ONI</a> ·
+        <a href="https://www.cpc.ncep.noaa.gov/data/teledoc/telecontents.shtml" target="_blank" rel="noopener">NAO, AO, PNA</a> ·
+        <a href="https://www.ncei.noaa.gov/access/monitoring/pdo/" target="_blank" rel="noopener">PDO</a></li>
+      <li><b>Other</b>: <a href="https://nsidc.org/data/g02135" target="_blank" rel="noopener">NSIDC Sea Ice Index</a> ·
+        <a href="https://waterdata.usgs.gov/monitoring-location/USGS-01358000/" target="_blank" rel="noopener">USGS Hudson River</a></li>
+    </ul>
+    <details class="table-view" open>
+      <summary>How we tested</summary>
+      <div>
+        <p class="note">Sea level in mm, 1993–2012 average = 0. Tide gauges measure against the land; satellites against the Earth's centre.</p>
+        <h3>How we tested the clues</h3>
+        <p>We counted storm-surge days in each October–April season, 1980–2025, and checked 29 clues from around the world. Each clue
+          predicts a season with a model fitted on the other seasons, so no winter helps predict itself. Clues that looked useful on
+          1981–2009 then had to predict 2010–2025, winters they had never seen. El Niño, read in June, passed.</p>
+        <h3>The sea-level detective</h3>
+        <p>For the chosen place and years we fit a trend line plus the yearly cycle (and El Niño, when removed), and widen the
+          uncertainty because sea level remembers last month. A rise counts as real when its 95% range stays above zero.
+          “Years of records needed” follows <a href="https://doi.org/10.1029/98JD00995" target="_blank" rel="noopener">Weatherhead et al. (1998)</a>.</p>
+        <h3>Use of AI</h3>
+        <p class="note">AI tools (Claude, Codex, Kimi) helped with literature search, code and drafting. Every number comes from our
+          open-source pipeline and was checked by the team.</p>
+      </div>
+    </details>
+    <p class="generated" id="generated"></p>
+  </article>
+  </section>
+</main>
+<button type="button" class="anim-master" id="anim-master" aria-pressed="true">❚❚ Pause the moving charts</button>
+<footer class="wrap foot">Sea Level Detective · Team Poseidon SAR (Maxim Zyskin, Hanyue Shen, Ningzi Chen) · NASA Space Apps Challenge 2026 · Data: NASA GISTEMP, POWER, GIBS and PO.DAAC; NOAA CO-OPS and CPC; USGS</footer>
+</body>
+</html>

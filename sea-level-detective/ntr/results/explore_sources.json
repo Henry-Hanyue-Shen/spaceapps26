@@ -1,0 +1,122 @@
+{
+ "slp_iceland_power": {
+  "source": "NASA POWER (MERRA-2) SLP, 65.08N 22.73W, kPa",
+  "nasa": true
+ },
+ "slp_azores_power": {
+  "source": "NASA POWER (MERRA-2) SLP, 37.74N 25.68W, kPa",
+  "nasa": true
+ },
+ "npi_power": {
+  "source": "NASA POWER (MERRA-2) SLP at 50N 165W (Aleutian low / North Pacific index proxy)",
+  "nasa": true
+ },
+ "polar_slp_power": {
+  "source": "NASA POWER (MERRA-2) SLP at 85N (polar pressure, AO proxy)",
+  "nasa": true
+ },
+ "wind_ne_power": {
+  "source": "NASA POWER (MERRA-2) NY Bight 10 m wind from the NE, m/s",
+  "nasa": true
+ },
+ "slp_nybight_power": {
+  "source": "NASA POWER (MERRA-2) NY Bight SLP, kPa",
+  "nasa": true
+ },
+ "storminess_power": {
+  "source": "NASA POWER (MERRA-2) NY Bight: SD of daily SLP within the month",
+  "nasa": true
+ },
+ "nino34_giss": {
+  "source": "NASA GISTEMP v4 gridded, box mean minus 60S-60N mean (nino34_giss)",
+  "nasa": true
+ },
+ "natl_giss": {
+  "source": "NASA GISTEMP v4 gridded, box mean minus 60S-60N mean (natl_giss)",
+  "nasa": true
+ },
+ "subpolar_giss": {
+  "source": "NASA GISTEMP v4 gridded, box mean minus 60S-60N mean (subpolar_giss)",
+  "nasa": true
+ },
+ "nwatl_shelf_giss": {
+  "source": "NASA GISTEMP v4 gridded, box mean minus 60S-60N mean (nwatl_shelf_giss)",
+  "nasa": true
+ },
+ "trop_natl_giss": {
+  "source": "NASA GISTEMP v4 gridded, box mean minus 60S-60N mean (trop_natl_giss)",
+  "nasa": true
+ },
+ "oni": {
+  "source": "NOAA CPC Oceanic Nino Index",
+  "nasa": false
+ },
+ "nao_cpc": {
+  "source": "NOAA CPC NAO",
+  "nasa": false
+ },
+ "ao_cpc": {
+  "source": "NOAA CPC AO",
+  "nasa": false
+ },
+ "pna_cpc": {
+  "source": "NOAA CPC PNA",
+  "nasa": false
+ },
+ "qbo_cpc": {
+  "source": "NOAA CPC QBO 50 hPa zonal wind",
+  "nasa": false
+ },
+ "pdo_ncei": {
+  "source": "NOAA NCEI PDO (ERSST v5)",
+  "nasa": false
+ },
+ "seaice_arctic": {
+  "source": "NSIDC Sea Ice Index v4, Arctic extent (NASA DAAC at NSIDC)",
+  "nasa": false
+ },
+ "msl_bermuda": {
+  "source": "NOAA CO-OPS 2695540 monthly mean sea level, mm",
+  "nasa": false
+ },
+ "msl_portland": {
+  "source": "NOAA CO-OPS 8418150 monthly mean sea level, mm",
+  "nasa": false
+ },
+ "msl_boston": {
+  "source": "NOAA CO-OPS 8443970 monthly mean sea level, mm",
+  "nasa": false
+ },
+ "msl_montauk": {
+  "source": "NOAA CO-OPS 8510560 monthly mean sea level, mm",
+  "nasa": false
+ },
+ "msl_kings_point": {
+  "source": "NOAA CO-OPS 8516945 monthly mean sea level, mm",
+  "nasa": false
+ },
+ "msl_sandy_hook": {
+  "source": "NOAA CO-OPS 8531680 monthly mean sea level, mm",
+  "nasa": false
+ },
+ "msl_atlantic_city": {
+  "source": "NOAA CO-OPS 8534720 monthly mean sea level, mm",
+  "nasa": false
+ },
+ "msl_sewells_point": {
+  "source": "NOAA CO-OPS 8638610 monthly mean sea level, mm",
+  "nasa": false
+ },
+ "msl_charleston": {
+  "source": "NOAA CO-OPS 8665530 monthly mean sea level, mm",
+  "nasa": false
+ },
+ "msl_key_west": {
+  "source": "NOAA CO-OPS 8724580 monthly mean sea level, mm",
+  "nasa": false
+ },
+ "hudson_flow": {
+  "source": "USGS 01358000 Hudson River at Green Island, monthly mean discharge",
+  "nasa": false
+ }
+}
