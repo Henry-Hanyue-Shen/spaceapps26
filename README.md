@@ -10,7 +10,7 @@ Two routes to one warning:
 - **14-day forecast:** an equatorial shallow-water model forecasts the Pacific's next two weeks (physics by M. Zyskin).
 
 ## Links
-- Website: https://ivyreia3-boop.github.io/wbsite/sea-level-detective/
+- Website: https://henry-hanyue-shen.github.io/spaceapps27/ (mirror: https://ivyreia3-boop.github.io/wbsite/sea-level-detective/)
 - Slides: https://ivyreia3-boop.github.io/wbsite/sea-level-detective/slides.html
 - 30-second video: https://ivyreia3-boop.github.io/wbsite/sea-level-detective/video30.html
 - 1-minute video: https://ivyreia3-boop.github.io/wbsite/sea-level-detective/video.html
